@@ -73,4 +73,43 @@ cities.remove(at: 4)
 print(cities.count)
 print(cities.sorted())
 let useReverse = cities.reversed()
-print(useReverse)
+print(useReverse); print("")
+
+/* Arrays is a wonderful way to store multiple data in
+ one single variable/constant, however, as you need to
+ the data using position it can be very dangerous and
+ potencial crash our your app if you try to access one
+ position that not exist. To avoid this kind of error,
+ on Swift we can use DICTIONARIES to access your data
+ securely, using a key as a position, you can see some
+ examples below:
+ */
+
+var galaxyKnight = [
+    "name": "Luke Skywalker",
+    "occupation": "Jedi Knight",
+    "location": "Tattooine"
+]
+print(galaxyKnight)
+print(galaxyKnight["name"]); print("")
+
+/* When reading from a dictionary, you can provide a
+ default value to use if the key doesn't exist. Treating
+ with some optional that we will see later on.
+ See below:
+ */
+
+print(galaxyKnight["name", default: "unknown"])
+print(galaxyKnight["occupation", default: "unknown"])
+print(galaxyKnight["location", default: "unknown"])
+
+/*
+ You can also create an empty dictionary using whatever
+ explicit types you want to store, then set keys one by one:
+ */
+
+var distanceToLondon = [String: Double]()
+distanceToLondon["Brighton"] = 64.2
+distanceToLondon["Oxford"] = 59.6
+distanceToLondon["Cambridge"] = 61.1
+print(distanceToLondon["Brighton"])

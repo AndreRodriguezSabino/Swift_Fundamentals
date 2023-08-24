@@ -113,3 +113,26 @@ distanceToLondon["Brighton"] = 64.2
 distanceToLondon["Oxford"] = 59.6
 distanceToLondon["Cambridge"] = 61.1
 print(distanceToLondon["Brighton"])
+
+
+/*
+ So far we've learned about two way of collecting data
+ in Swift: arrays and dictionaries. There is a third very
+ common way to group data, called a SET - They are similar
+ to arrays, except you can not add duplicate items, and
+ they do not store their items in a particular order.
+ */
+
+var people = Set(["Jon Snow", "Ned Stark", "Arya Stark", "Tyrion Lanister"])
+people.insert("Robb Stak")
+print(people)
+print(people.sorted())
+
+// Example below to create empty SET
+
+var countries = Set<String>()
+countries.insert("United Kingdom")
+countries.insert("Spain")
+countries.insert("United States")
+countries.insert("South Africa")
+print(countries)

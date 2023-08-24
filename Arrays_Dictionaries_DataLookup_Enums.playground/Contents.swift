@@ -136,3 +136,30 @@ countries.insert("Spain")
 countries.insert("United States")
 countries.insert("South Africa")
 print(countries)
+
+
+/*
+ An ENUM - Shot for enumeration, is a set of named values
+ we can create and use in our code. They don't have any special
+ meaning to Swift, but they are more efficient and safer, so
+ you'll use them a lot in your code.
+ */
+
+enum Weekday {
+    case Monday
+    case Tuesday
+    case Wednesday
+    case Thursday
+    case Friday
+}
+
+var day = Weekday.Tuesday
+print(day)
+
+enum MonthsOfTheYear {
+    case January, February, March, April, May, June, July, August, September, Octuber, November, December
+}
+var month = MonthsOfTheYear.July
+print(month)
+month = .November //Short way to represent the data
+print(month)

@@ -161,5 +161,5 @@ enum MonthsOfTheYear {
 }
 var month = MonthsOfTheYear.July
 print(month)
-month = .November //Short way to represent the data
+month = .November //Short way to represent data
 print(month)

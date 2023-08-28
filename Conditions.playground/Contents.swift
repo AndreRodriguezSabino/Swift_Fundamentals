@@ -95,3 +95,4 @@ if userName2.isEmpty {
     userName2 = "Anonymous"
 }
 print(userName2)
+print("")

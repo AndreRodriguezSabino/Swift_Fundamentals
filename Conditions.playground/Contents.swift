@@ -138,3 +138,19 @@ a sustainble meal.
 } else {
     print("With the age of \(challenge25) years old, you are not allowed to drink alcohol.")
 }
+
+enum TransportationOption {
+    case airplane, helicopter, bicycle, car, scooter
+}
+
+var chosenTransport = TransportationOption.airplane
+
+if chosenTransport == .airplane || chosenTransport == .helicopter {
+    print("It is a good day to fly!")
+} else if chosenTransport == .bicycle {
+    print("Let's go for a cycling!")
+} else if chosenTransport == .car {
+    print("Today is d the day to get stuck on the traffic...")
+} else {
+    print("Probably today I will rent a scooter.")
+}

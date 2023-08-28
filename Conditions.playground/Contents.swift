@@ -114,3 +114,11 @@ if age >= 18 {
     print("With the age of \(age) years old, you are not eligible to vote on the next election.")
     print("Please wait until you turn 18 years old.")
 }
+
+/*
+ There's an even more advanced condition called ELSE IF, which lets
+ us run a new check if the first one fails. You can have just one
+ of these if you want, or have multiple ELSE IF, and even combine
+ ELSE IF with an ELSE if needed. However, you can only ever have one
+ ELSE, because that means "if all the other condition have been false".
+ */

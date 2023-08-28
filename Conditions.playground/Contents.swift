@@ -150,7 +150,7 @@ if chosenTransport == .airplane || chosenTransport == .helicopter {
 } else if chosenTransport == .bicycle {
     print("Let's go for a cycling!")
 } else if chosenTransport == .car {
-    print("Today is d the day to get stuck on the traffic...")
+    print("Today is d the day to get stuck in the traffic...")
 } else {
     print("Probably today I will rent a scooter.")
 }

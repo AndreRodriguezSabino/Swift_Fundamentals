@@ -96,3 +96,12 @@ if userName2.isEmpty {
 }
 print(userName2)
 print("")
+
+/*
+ Swift also has a sort of condition (multiple condition) for
+ some sort of code. For example, if we need to set some code
+ up having more than one option on the same block of code, we
+ have the ELSE statment, IF some happen you have as a return
+ one condition, in case not ELSE we get a different result
+ as a return. See some examples below:
+ */

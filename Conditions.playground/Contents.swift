@@ -105,3 +105,12 @@ print("")
  one condition, in case not ELSE we get a different result
  as a return. See some examples below:
  */
+
+var age = 18
+
+if age >= 18 {
+    print("With the age of \(age) years old, you are eligible to vote on the next election.")
+} else {
+    print("With the age of \(age) years old, you are not eligible to vote on the next election.")
+    print("Please wait until you turn 18 years old.")
+}

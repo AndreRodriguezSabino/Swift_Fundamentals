@@ -114,6 +114,7 @@ if age >= 18 {
     print("With the age of \(age) years old, you are not eligible to vote on the next election.")
     print("Please wait until you turn 18 years old.")
 }
+print("")
 
 /*
  There's an even more advanced condition called ELSE IF, which lets
@@ -122,3 +123,18 @@ if age >= 18 {
  ELSE IF with an ELSE if needed. However, you can only ever have one
  ELSE, because that means "if all the other condition have been false".
  */
+
+var challenge25 = 21
+
+if challenge25 >= 18 {
+    print("Your age is \(challenge25) years old, and with this age you can drink.")
+} else if challenge25 >= 16 && challenge25 < 18 {
+    print("""
+With the age of \(challenge25) years old, you only can have a drink of
+one pint of beer, cider or one glass of wine together with someone
+that is 18 or older that order the items mentioned before together with
+a sustainble meal.
+""")
+} else {
+    print("With the age of \(challenge25) years old, you are not allowed to drink alcohol.")
+}

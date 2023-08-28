@@ -154,3 +154,7 @@ if chosenTransport == .airplane || chosenTransport == .helicopter {
 } else {
     print("Probably today I will rent a scooter.")
 }
+
+/*
+ SWITCH condition: 
+ */

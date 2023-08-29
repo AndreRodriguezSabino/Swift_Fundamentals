@@ -207,6 +207,7 @@ case "London":
 default:
     print("Probably you are outside of England")
 }
+print("")
 
 /*
  If your intention if for Swift to continue executing folllowing

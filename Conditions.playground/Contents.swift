@@ -208,3 +208,47 @@ default:
     print("Probably you are outside of England")
 }
 
+/*
+ If your intention if for Swift to continue executing folllowing
+ cases, you can employ FALLTHROUGH. Although infrequently utilized,
+ there are occasions - albeit rare - when this approach can assist
+ in preventing redundant tasks.
+ */
+
+let countDownRocket = 10
+print("The count down for the rocket launch has just started...")
+
+switch countDownRocket {
+case 10:
+    print("Ten!!")
+    fallthrough
+case 9:
+    print("Nine!!")
+    fallthrough
+case 8:
+    print("Eight!!")
+    fallthrough
+case 7:
+    print("Seven!!")
+    fallthrough
+case 6:
+    print("Six!!")
+    fallthrough
+case 5:
+    print("Five!!")
+    fallthrough
+case 4:
+    print("Four!!")
+    fallthrough
+case 3:
+    print("Three!!")
+    fallthrough
+case 2:
+    print("Two!!")
+    fallthrough
+case 1:
+    print("One!!")
+    fallthrough
+default:
+    print("Blast off!!!")
+}

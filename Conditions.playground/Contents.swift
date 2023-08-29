@@ -156,5 +156,54 @@ if chosenTransport == .airplane || chosenTransport == .helicopter {
 }
 
 /*
- SWITCH condition: 
+ SWITCH condition: Switch lets us check individual cases one
+ by one. In case of an Enum, it knows all possible cases the
+ Enum can have, so if we miss one or check one twice it will
+ complain.
  */
+
+enum seasonOfTheYear {
+    case spring, summer, autumn, winter
+}
+
+var forecast = seasonOfTheYear.summer
+
+switch forecast {
+case .summer:
+    print("On \(forecast), the weather is really hot!")
+case .autumn:
+    print("On \(forecast), the weather is fine and lot of leaves fall from the trees.")
+case .spring:
+    print("On \(forecast), new flowers just coming out!")
+case .winter:
+    print("On \(forecast), the weather is really cold!")
+}
+
+/*
+ SWITCH statements must be exhaustive - you must ensure all
+ possible values are covered. If you're switching on a string
+ then cleary it's not possible to make an exhaustive check of
+ all possible strings because there is an infinite number, so
+ instead we need to provide a default case - code to run if
+ none of the other cases match.
+ The DEFAULT: it will be run if all cases have failed to match.
+ Swift checks its cases in order and runs the first one that
+ matches. If you place DEFAULT before any other case, that case
+ is useless because it will never be matched and Swift will
+ refuse to build your code.
+ */
+
+let EnglandCapital = "London"
+
+switch EnglandCapital {
+case "Oxford":
+    print("Here in Oxford is a city the has history with the University and Harry Potter films.")
+case "Cambridge":
+    print("Cambridge is also known for its University.")
+case "Dover":
+    print("Dover is known for its country borders, eurotunnel and swimmers who cross the channel to France.")
+case "London":
+    print("London, is the England capital. With some amazing places and great restaurants.")
+default:
+    print("Probably you are outside of England")
+}

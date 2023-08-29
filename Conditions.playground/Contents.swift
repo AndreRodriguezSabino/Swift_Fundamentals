@@ -253,3 +253,32 @@ case 1:
 default:
     print("Blast off!!!")
 }
+print("")
+
+/*
+ TERNARY CONDITIONAL OPERATOR
+ There's a final method for evaluating conditions in Swift,
+ and upon encountering it, you mighgt find yourself pondering
+ its utility.
+ This alternative is referred to as the ternary conditional
+ operator. To comprehend the nomenclature, it's essential
+ to be familiar with the fact that symbols like +, -, ==, and
+ the like are classified as binary operators since they operate
+ on two input elements. For instance, the operation 3 + 9
+ involves the numbers 3 and 9.
+ 
+ Conversely, ternary operators operate on three input elements.
+ As a matter of fact, given that the ternary conditional operator
+ stands as the sole ternary operator in Swift, it's frequently
+ denoted simply as "the ternary operator".
+ 
+ But enough about terminology; what precisely does it achive?
+ Essentially, the ternary operator empowers us to assess a
+ condition and yield one two values: one value if the condition
+ holds true, and another value if it doesn't.
+ For example:
+ */
+
+let minimumAgeToDrink = 18
+let canDrink = minimumAgeToDrink >= 18 ? "Yes!" : "No!"
+print(canDrink)

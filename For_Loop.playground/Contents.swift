@@ -63,3 +63,12 @@ for i in 1...10 {
     }
     print()
 }
+
+/*
+ On Swift we can use a different way of range that counts up to
+ but excluding the final number: "..<". You can see it below:
+*/
+
+for i in 1..<15 {
+    print("Counting up to \(i)")
+}

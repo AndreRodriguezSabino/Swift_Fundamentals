@@ -45,10 +45,21 @@ for os in platforms {
 for i in 1...10 {
     print("3 X \(i) = \(3 * i)")
 }
-print("")
+print()
 
 // In the example above 1...10 means, in an interval of 1 to 10.
  
 for i in 1...10 {
     print("7 X \(i) = \(7 * i)")
+}
+print()
+
+// You can also put loops inside loops, called nested loops:
+
+for i in 1...10 {
+    print("The \(i) times table:")
+    for j in 1...10 {
+        print(" \(i) X \(j) = \(j * i)")
+    }
+    print()
 }

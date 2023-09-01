@@ -72,3 +72,18 @@ for i in 1...10 {
 for i in 1..<15 {
     print("Counting up to \(i)")
 }
+
+/*
+ In the example below, when you want to run your code a certain
+ number of times using a range, but you don't actually want the
+ loop variable - you don't want "i" or "j", because you don't use it.
+ For this, you can replace the loop variable with an underscore:
+ */
+
+var robotTilt = "I am switching on my system"
+
+for _ in 1...5 {
+    robotTilt += " system"
+}
+
+print(robotTilt + "...")

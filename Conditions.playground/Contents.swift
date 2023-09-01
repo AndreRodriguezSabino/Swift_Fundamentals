@@ -282,3 +282,14 @@ print("")
 let minimumAgeToDrink = 18
 let canDrink = minimumAgeToDrink >= 18 ? "Yes!" : "No!"
 print(canDrink)
+
+let names: Array<String> = ["Andre", "Lucas", "Graci"]
+let countNames = names.isEmpty ? "No body" : "In this Array are \(names.count) names."
+print(countNames)
+
+enum theme {
+    case Dark, Light
+}
+let systemTheme = theme.Dark
+let backgroung = systemTheme == .Dark ? "Dark" : "Light"
+print(backgroung)

@@ -72,6 +72,7 @@ for i in 1...10 {
 for i in 1..<15 {
     print("Counting up to \(i)")
 }
+print()
 
 /*
  In the example below, when you want to run your code a certain
@@ -87,3 +88,10 @@ for _ in 1...5 {
 }
 
 print(robotTilt + "...")
+
+/*
+ Another way to show intervals range is represented like this,
+ "1...", this means you are trying to count from 1 to the end
+ of your Array for example if you don't know how many items
+ have included in your Array.
+ */

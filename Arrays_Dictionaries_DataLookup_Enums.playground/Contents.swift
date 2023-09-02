@@ -163,3 +163,9 @@ var month = MonthsOfTheYear.July
 print(month)
 month = .November //Short way to represent data
 print(month)
+
+var setOfBlogCategories: Set<String> = ["Swift", "Debugging", "Xcode", "Workflow", "Optimization"]
+let (inserted, memberAfterInsert) = setOfBlogCategories.insert("Swift")
+if !inserted {
+    print("\(memberAfterInsert) already exists")
+}

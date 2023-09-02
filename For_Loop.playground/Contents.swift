@@ -103,4 +103,24 @@ print(range.last!) // 10
 /*
  A closed range operator going from a...b defines a range that includes
  both a and b in which a must not be greater than b.
+ The closed operator is useful if you’d like to use all the values.
+ For example, if you’d like to iterate over all elements of a collection:
  */
+
+let names = ["Andre", "Graci", "Lucas"]
+for index in 0...2 {
+    print("Name \(index) is \(names[index])")
+}
+// Name 0 is Andre
+// Name 1 is Graci
+// Name 2 is Lucas
+
+print(names[0...2])
+
+/*
+ A one-sided range operator only defines one side of the bounds, for example,
+ a... or ...b. A one-sided range goes as far as possible in one direction
+ */
+
+print(names[1...])
+print(names[...1])

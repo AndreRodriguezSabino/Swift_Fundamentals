@@ -96,3 +96,11 @@ print(robotTilt + "...")
  have included in your Array.
  */
 
+let range: ClosedRange = 0...10
+print(range.first!) // 0
+print(range.last!) // 10
+
+/*
+ A closed range operator going from a...b defines a range that includes
+ both a and b in which a must not be greater than b.
+ */

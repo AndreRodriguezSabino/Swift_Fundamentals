@@ -52,3 +52,32 @@ while table != 6 {
  are well-suited when you need to apply a particular custom condition to
  govern the loop's execution.
  */
+
+let colour = ["Blue", "Black", "Grey", "Red"]
+var count = 0
+while count <= 2 {
+    print("The colour chosen was \(colour[count])")
+    count += 1
+}
+
+var dogs: Int = 0
+while dogs < 10 {
+    dogs += 1
+    print("I'm getting another dog.")
+    if dogs == 4 {
+        print("Enough dogs!")
+        dogs = 10
+    }
+}
+
+var averageScore = 2.5
+while averageScore < 15.0 {
+    averageScore += 2.5
+    print("The average score is \(averageScore)")
+}
+
+var speed = 50
+while speed <= 55 {
+    print("Accelerating to \(speed)")
+    speed += 1
+}

@@ -128,3 +128,58 @@ for i in 1...100_000 {
     }
 }
 print(multiple)
+
+/*
+ Swift's labeled statements are like nametags for specific sections of our code.
+ They are particularly handy when we need to escape from nested loops.
+
+ To better understand how they work, let's dive into an example involving
+ unlocking a safe with a combination of movements. Imagine we have an array
+ representing all the possible movements:
+ */
+
+let options = ["up", "down", "left", "right"]
+
+//For the purpose of testing and experimentation, here's the hidden combination we're attempting to guess:
+let secretCombination = ["up", "up", "right",]
+
+/*
+ To discover the secret combination, we have to create arrays that encompass all
+ potential three-color variations. These variations include sequences like:
+
+ - up, up, up
+ - up, up, down
+ - up, up, left
+ - up, up, right
+ - up, down, left
+ - up, down, right
+ ...and so on.
+ 
+ To achieve this, we can write three loops, with one loop nested inside another,
+ to systematically generate these combinations.
+ */
+outerLoop: for option1 in options {
+    for option2 in options {
+        for option3 in options {
+                print("Trying: \(option1), \(option2), \(option3)")
+                let attempt = [option1, option2, option3]
+                
+                if attempt == secretCombination {
+                    print("The combination is \(attempt)!")
+                    break outerLoop
+                }
+        }
+    }
+}
+
+/*
+ This involves repeatedly going through the same items to build an attempt array,
+ and if this attempt matches the secret combination, a message is displayed.
+ 
+ Those three loops come to a halt immediately when they discover the combination
+ we're seeking. In this simple example, the impact on performance may not be significant.
+ However, imagine if you were dealing with hundreds or even thousands of items.
+ In such cases, it becomes crucial to conserve computational effort like this.
+ Remember this concept for your own coding adventures—it can be a valuable optimization
+ technique.
+ */

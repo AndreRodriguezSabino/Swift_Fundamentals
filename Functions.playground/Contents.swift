@@ -49,3 +49,15 @@ isEven(number: 5)
  generate within a function is automatically cleared once the function completes
  its execution.
  */
+
+func timeTable(num: Int, end: Int) {
+    print("The time table of: \(num)")
+    for i in 1...end {
+        print(" \(num) X \(i)= \(i * num)")
+    }
+}
+timeTable(num: 7, end: 5)
+timeTable(num: 3, end: 6)
+timeTable(num: 6, end: 7)
+timeTable(num: 8, end: 1)
+timeTable(num: 9, end: 10)

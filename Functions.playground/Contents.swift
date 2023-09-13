@@ -61,3 +61,68 @@ timeTable(num: 3, end: 6)
 timeTable(num: 6, end: 7)
 timeTable(num: 8, end: 1)
 timeTable(num: 9, end: 10)
+
+/*
+ When you want a function to give you a return, follow these two steps in Swift:
+
+ Use an arrow "->" followed by the data type just before the opening brace of your
+ function. This tells Swift what kind of return the function will provide.
+
+ Employ the "return" keyword to send back the desired result.
+
+ For instance, imagine you want to simulate rolling a dice in different parts of
+ your code. Instead of always assuming it's a 6-sided dice, you can create a function
+ like this:
+ */
+
+func rollDice() -> Int {
+    return Int.random(in: 1...6)
+}
+
+let result = rollDice()
+print(result)
+
+/*
+ Let's delve into a somewhat more challenging example: how to determine whether two
+ strings contain the same letters, irrespective of their order?
+
+ In this scenario, you need to create a function that accepts two string arguments
+ and returns true if they both contain the same letters, even if the letters are
+ arranged differently. For example, "efg" and "gef" should be deemed equivalent
+ because they both include the letters "e," "f," and "g."
+
+ In truth, you already possess sufficient knowledge to solve this problem independently.
+ However, you may have overlooked a technique that simplifies this task considerably:
+ when you utilize the sorted() function on any string, you obtain a new string with all
+ the letters arranged in alphabetical order. Consequently, if you apply this function
+ to both strings and compare the results using ==, you can ascertain whether the letters
+ are identical, regardless of their sequence.
+ */
+
+func findContents(type1: String, type2: String) -> Bool {
+    let first = type1.sorted()
+    let second = type2.sorted()
+    return first == second
+}
+findContents(type1: "efg", type2: "gef")
+
+/*
+ Also can be written without or with the key-word RETURN and doing it you can avoid write to
+ much code
+*/
+func Contents(type1: String, type2: String) -> Bool {
+    /* return */type1.sorted() == type2.sorted()
+}
+
+/*
+ Remember, this only works when your function consists of a single line of code, and, i
+ mportantly, that line of code must genuinely return the data you committed to returning.
+ */
+
+func pythagoras(a: Double, b: Double) -> Double {
+    let math = (a * a) + (b * b)
+    let result = sqrt(math)
+    return result
+}
+let hypotenuse = pythagoras(a: 22, b: 16)
+print(hypotenuse)

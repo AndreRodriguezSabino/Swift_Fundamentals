@@ -177,4 +177,50 @@ print("My full name is \(myName.firstName) \(myName.lastName)")
  Therefore, tuples possess a key advantage over dictionaries: they allow us to specify
  precisely which values exist and their data types, ensuring that we always have access
  to the expected data, whereas dictionaries may or may not contain the values we seek.
+ 
+ At times, you might encounter tuples that lack named elements. In such cases, you can
+ access the elements within the tuple by using numeric indices, starting from 0.
+ Here's how you can do it:
  */
+
+func newName() -> (String, String) {
+    ("Lucas", "Rodriguez")
+}
+let user = newName()
+print("Hello, my name is \(user.0) \(user.1)")
+
+/*
+ Lastly, if a function returns a tuple, you have the ability to extract and work with
+ its individual values if needed.
+ */
+
+func people() -> (first: String, second: String) {
+    (first: "Graci", second: "Arteaga")
+}
+//let users = people()
+//let firstN = users.first
+//let secondN = users.second
+let (first, second) = people()
+print("Hello, my name is \(first) \(second)")
+
+/*
+ Still Above -> This brings us back to the named version of the people() function,
+ where we receive a tuple, and then proceed to copy its elements into individual
+ variables before utilizing them. In essence, we're simply rearranging the data.
+ 
+ Nonetheless, instead of assigning the entire tuple to the users variable and
+ subsequently extracting individual values, we can streamline the process by
+ directly unpacking the return value from people() into two distinct constants.
+ */
+
+/*
+ In fact, if you find that you don't need all the values from the tuple, you can
+ take it a step further by using the underscore (_) to signal to Swift that you
+ want to disregard that specific part of the tuple:
+ */
+
+func allNames() -> (myFirst: String, mySecond: String) {
+    ("Luke", "Skywalker")
+}
+let (myFirst, _) = allNames()
+print("I only want to catch the first name here: \(myFirst)")

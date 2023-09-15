@@ -124,5 +124,6 @@ func pythagoras(a: Double, b: Double) -> Double {
     let result = sqrt(math)
     return result
 }
-let hypotenuse = pythagoras(a: 22, b: 16)
+let hypotenuse = pythagoras(a: 10, b: 16)
 print(hypotenuse)
+

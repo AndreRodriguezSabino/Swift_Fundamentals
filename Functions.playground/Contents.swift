@@ -127,3 +127,54 @@ func pythagoras(a: Double, b: Double) -> Double {
 let hypotenuse = pythagoras(a: 10, b: 16)
 print(hypotenuse)
 
+/*
+ Returning multiple values
+ 
+ In Swift, there's a solution in the form of tuples. Similar to arrays, dictionaries,
+ and sets, tuples allow us to store multiple pieces of data in a single variable.
+ However, unlike these other options, tuples have a fixed size and can hold various
+ data types.
+ */
+
+func setNames() -> (firstName: String, lastName: String) {
+    (firstName: "Andre", lastName: "Rodriguez")
+}
+let myName = setNames()
+print("My full name is \(myName.firstName) \(myName.lastName)")
+
+/*
+ The example above, our return type is (firstName: String, lastName: String), which is
+ essentially a tuple consisting of two strings.
+ 
+ In this tuple, each string has a designated name. These names aren't enclosed in quotes;
+ they serve as specific labels for each item within our tuple, unlike the arbitrary keys
+ used in dictionaries.
+
+ Inside the function, we construct a tuple that includes all the elements we promised,
+ associating them with their respective names. For instance, we set firstName to "Taylor,"
+ and so on.
+
+ When we invoke the setNames() function, we can access the values within the tuple using
+ these key names, such as firstName and lastName.
+
+ I understand that tuples may appear quite similar to dictionaries, but there are important
+ distinctions:
+
+ When you access values in a dictionary, Swift can't be certain in advance whether they exist
+ or not. While we might be confident that user["firstName"] will be present, Swift can't make
+ that assumption, necessitating the provision of a default value.
+
+ In contrast, when you access values in a tuple, Swift knows in advance that they are available
+ because the tuple explicitly specifies their presence.
+
+ Accessing values using user.firstName is not susceptible to typos, unlike dictionary keys,
+ which are strings that might lead to errors.
+
+ A dictionary could potentially contain numerous other values alongside "firstName,"
+ but in a tuple, we must explicitly list all the values it will contain. Consequently,
+ a tuple guarantees the presence of precisely those values and nothing more.
+
+ Therefore, tuples possess a key advantage over dictionaries: they allow us to specify
+ precisely which values exist and their data types, ensuring that we always have access
+ to the expected data, whereas dictionaries may or may not contain the values we seek.
+ */

@@ -351,3 +351,28 @@ printTimesTables(for: 5)
  using the term "parameter" for both, and when the distinction is crucial, I'll clarify by using "external
  parameter name" and "internal parameter name."
  */
+
+/*
+ If we use an underscore for a function parameter's external label, Swift allows us to have no name
+ for that parameter when we call the function. This practice is quite common in certain areas of
+ Swift development, especially when creating apps that don't use SwiftUI. However, there are many
+ other situations where you might find it useful.
+
+ The primary reason for omitting a parameter name is when your function's name is a verb, and the
+ first parameter is the thing the verb is acting on (a noun). For instance:
+
+ Saying hello to a person can be written as greet(taylor) instead of greet(person: taylor).
+ Purchasing a product can be expressed as buy(toothbrush) rather than buy(item: toothbrush).
+ Locating a customer can be simplified to find(customer) instead of find(user: customer).
+ This is particularly handy when the parameter label is likely to be the same as the name of
+ the thing you're passing in:
+
+ Singing a song can be written as sing(song) instead of sing(song: song).
+ Activating an alarm can be specified as enable(alarm) rather than enable(alarm: alarm).
+ Reading a book can be expressed as read(book) instead of read(book: book).
+ Before SwiftUI was introduced, apps were created using Apple's UIKit, AppKit, and WatchKit frameworks,
+ which were originally designed in an older language called Objective-C. In Objective-C, the first
+ parameter of a function was always unnamed. So, when you work with these frameworks in Swift,
+ you'll encounter many functions that have underscores for their first parameter label to maintain
+ compatibility with Objective-C.
+ */

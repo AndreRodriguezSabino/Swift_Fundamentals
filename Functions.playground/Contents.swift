@@ -325,7 +325,7 @@ let res = isUppercase(string)
  */
 
 func printTimesTables(for number: Int) {
-    for i in 1...12 {
+    for i in 1...10 {
         print("\(i) x \(number) is \(i * number)")
     }
 }

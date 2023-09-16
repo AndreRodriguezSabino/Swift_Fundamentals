@@ -264,3 +264,90 @@ let rolls = rollDice(sides: 6, count: 8)
 func hireEmployee(name: String) { }
 func hireEmployee(title: String) { }
 func hireEmployee(location: String) { }
+
+/*
+ Absolutely, all of these functions are named "hireEmployee()"—but don't worry,
+ Swift can figure out which one you're referring to based on the names of the
+ parameters you use. To make it easier to tell them apart, you'll often see
+ documentation mentioning each function along with its specific parameters,
+ like "hireEmployee(name:)" or "hireEmployee(title:)".
+ 
+ Sometimes, though, these parameter names are less helpful, and there are two
+ ways I want to look at.
+
+ First, think about the hasPrefix() function you learned earlier:
+ */
+
+let lyric = "Hello, world. I am enjoying Swift"
+print(lyric.hasPrefix("Hello"))
+
+/*
+ When we use the hasPrefix() function, we simply provide the prefix we want to
+ check for directly—no need to say something like hasPrefix(string:) or, even worse,
+ hasPrefix(prefix:). But why is that?
+
+ Well, when we define parameters for a function, we can actually give them two names:
+ one for when we call the function and another for when we use it inside the function itself.
+ hasPrefix() does this by specifying _ as the external name for its parameter. In Swift,
+ this means "ignore this" and effectively removes the need for an external label for that parameter.
+
+ We can apply the same technique in our own functions if we find it makes the code more readable.
+ For example, we previously had this function:
+ */
+
+func isUppercase(_ string: String) -> Bool {
+    string == string.uppercased()
+//func isUppercase(string: String) -> Bool {
+}
+
+let string = "HELLO, WORLD"
+//let res = isUppercase(string: string)
+let res = isUppercase(string)
+
+/*
+ This concept is frequently used in Swift. For instance, consider the append() function used to
+ add items to an array or the contains() function used to check if an item exists in an array.
+ In both cases, it's quite clear what the parameter is without needing an additional label.
+
+ Now, the second issue with external parameter names arises when they don't quite fit naturally
+ when calling the function. You still want to include them, so using _ as a placeholder isn't a
+ great choice. Let me illustrate this with another function we discussed earlier:
+ 
+ Imagine saying "print times table for 5" out loud; it's clear and makes sense. However,
+ this doesn't work in Swift. Even though "for" is a nice and clear name when calling the function,
+ it's not allowed inside the function itself.
+
+ You've already seen that we can use _ before the parameter name to avoid writing an external
+ parameter name. The alternative is to provide a second name for the parameter: one for external
+ use and one for internal use. This approach results in more readable code when calling the function.
+
+ Here's how it's done:
+ */
+
+func printTimesTables(for number: Int) {
+    for i in 1...12 {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(for: 5)
+
+/*
+ There are three important things to pay close attention to here:
+
+ 1 - We specify for number: Int: The external name is "for," the internal name is "number," and it's of type Int.
+ 
+ 2 - When we call the function, we use the external name for the parameter, like this: printTimesTables(for: 5).
+ 
+ 3 - Inside the function, we use the internal name for the parameter, as in print("\(i) x \(number) is \(i * number)").
+ 
+ So, Swift provides two key methods for managing parameter names: we can use _ for the external parameter
+ name to indicate that it shouldn't be used, or we can include a second name so that we have both external
+ and internal parameter names.
+
+ Tip: I mentioned earlier that technically, the values you pass into a function are called "arguments," and
+ the values you receive inside the function are called "parameters." This can get a bit confusing because we
+ have both argument labels and parameter names in the function definition. However, for simplicity, I'll be
+ using the term "parameter" for both, and when the distinction is crucial, I'll clarify by using "external
+ parameter name" and "internal parameter name."
+ */

@@ -224,3 +224,43 @@ func allNames() -> (myFirst: String, mySecond: String) {
 }
 let (myFirst, _) = allNames()
 print("I only want to catch the first name here: \(myFirst)")
+
+/*
+ - Customizing Parameters Labels -
+ 
+ You've observed that Swift developers prefer to assign names to their function parameters.
+ This practice enhances clarity, making it easier to understand the purpose of these
+ parameters when the function is invoked. As an example, we can create a function to
+ simulate rolling a dice a specific number of times, utilizing parameters to determine
+ the number of sides on the dice and the quantity of rolls:
+ */
+
+func rollDice(sides: Int, count: Int) -> [Int] {
+    // Start with an empty array
+    var rolls = [Int]()
+
+    // Roll as many dice as needed
+    for _ in 1...count {
+        // Add each result to our array
+        let roll = Int.random(in: 1...sides)
+        rolls.append(roll)
+    }
+
+    // Send back all the rolls
+    return rolls
+}
+
+let rolls = rollDice(sides: 6, count: 8)
+
+/*
+ Even if you revisit this code after six months, you can still easily understand what
+ rollDice(sides: 6, count: 8) does.
+
+ Swift places a lot of importance on naming parameters for use outside the function.
+ In fact, it uses these names to decide which method to execute. This is different from
+ many other programming languages, but in Swift, it's completely valid:
+ */
+
+func hireEmployee(name: String) { }
+func hireEmployee(title: String) { }
+func hireEmployee(location: String) { }

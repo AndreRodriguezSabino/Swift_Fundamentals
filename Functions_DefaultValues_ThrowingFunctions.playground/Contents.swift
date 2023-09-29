@@ -57,3 +57,25 @@ var names = ["Andre", "Lucas", "Luke", "Vader"]
 names.count
 names.removeAll(keepingCapacity: true)
 names.count
+
+/*
+  <-- Handle Errors in Functions -->
+ 
+ Mistakes and problems occur frequently in programming, such as when you try to read a
+ file that doesn't exist or when downloading data fails due to network issues. If we don't
+ deal with these issues properly, our code can crash. Therefore, Swift requires us to
+ handle errors or, at the very least, acknowledge the possibility of errors occurring.
+
+ This process involves three steps:
+
+ 1 - Informing Swift about the potential errors that can occur.
+ 2 - Creating a function that can detect and report errors when they occur.
+ 3 - Invoking that function and managing any errors that might arise.
+ 
+ Let's walk through an example: Suppose a user wants us to evaluate the strength of their password.
+ We should report a serious error if the password is too short or too easily guessable.
+
+ To begin, we need to define the types of errors that could occur. This means creating a new
+ enumeration (enum) that builds upon Swift's built-in Error type, like this:
+ */
+

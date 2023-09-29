@@ -79,3 +79,98 @@ names.count
  enumeration (enum) that builds upon Swift's built-in Error type, like this:
  */
 
+enum passwordError: Error {
+     case short, obvious
+}
+
+/*
+ This step defines two possible errors related to passwords: "short" and "obvious."
+ It doesn't specify the exact criteria for these errors, only that they are potential issues.
+
+ For step two, we create a function that can trigger one of these errors. When an error
+ is triggered or "thrown" in Swift, it means something serious went wrong within the function.
+ Instead of continuing with normal execution, the function stops immediately and doesn't provide
+ any result.
+
+ In our case, we're designing a function to assess the strength of a password. If the password
+ is very weak (less than 5 characters or widely known), we'll throw an error right away.
+ For all other passwords, we'll return a rating such as "OK," "Good," or "Excellent."
+
+ Here's how this is implemented in Swift:
+ */
+
+func checkPassword(_ password: String) throws -> String {
+    if password.count < 5 {
+        throw passwordError.short
+    }
+    if password == "12345" {
+        throw passwordError.obvious
+    }
+    if password.count < 8 {
+        return "OK"
+    } else if password.count < 10 {
+        return "Good"
+    } else {
+        return "Excellent"
+    }
+}
+ 
+/*
+ Let's break down the process:
+
+ 1 - If a function can potentially encounter errors but doesn't handle them itself,
+ you must declare the function as "throws" before specifying its return type.
+ 2 - We don't specify the exact type of error that the function might throw, only
+ that it has the potential to throw errors.
+ 3 - Just marking a function with "throws" doesn't mean it must throw errors; it simply
+ means that it's allowed to throw them.
+ 4 - When you want to trigger an error, you use the "throw" keyword followed by one of
+ our PasswordError cases. This immediately exits the function, so it won't return a string.
+ 5 - If no errors are thrown, the function behaves as usual and returns a string.
+ This covers the second step of handling errors: we've defined the possible errors and
+ written a function that can throw them.
+
+ Now, for the final step of handling errors in Swift:
+
+ 1 - You start a block of code where errors might occur by using the "do" keyword.
+ 2 - When you call one or more functions that can throw errors, you use the "try" keyword to
+ indicate that you're aware of the potential for errors.
+ 3 - You handle any errors that may be thrown using the "catch" keyword.
+ In pseudocode, it looks like this:
+ 
+ do {
+     try someRiskyWork()
+ } catch {
+     print("Handle errors here")
+ }
+ 
+ Let's dig into this code snippet:
+
+ If the "checkPassword()" function runs without any issues, it will return a value stored
+ in the "result" variable, which is then printed out. However, if any errors occur
+ (which is the case here), the message about the password rating will never be printed –
+ the execution will immediately jump to the "catch" block.
+
+ Now, there's a crucial part of this code that's worth discussing: the "try" keyword.
+ It must be used before calling any functions that might throw errors. It serves as a visual
+ cue to developers that regular code execution could be interrupted if an error occurs.
+
+ When you use "try," you need to be within a "do" block and ensure that you have one or more
+ "catch" blocks ready to handle potential errors. In certain situations, there's an alternative
+ called "try!" which doesn't require "do" and "catch" but will crash your code if an error
+ is thrown. You should use "try!" sparingly and only if you're absolutely certain that an
+ error won't occur.
+
+ When it comes to handling errors, you must always include a "catch" block that can handle
+ any type of error.
+ */
+
+let password = "12345"
+do {
+    let result = try checkPassword(password)
+    print("Password rate: \(result)")
+} catch passwordError.short {
+    print("Error Detected. Password too short, please create a longer password.")
+} catch passwordError.obvious {
+    print("Error Detected. Password easy to find out, please create a more difficult password.")
+}

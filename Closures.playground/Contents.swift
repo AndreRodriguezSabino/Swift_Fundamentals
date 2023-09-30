@@ -90,14 +90,36 @@ func UserData(for id: Int) -> String {
 let data: (Int) -> String = UserData
 let user = data(1986)
 print(user)
+/*
+ Initially, it's straightforward: we have a function that takes an integer and returns a string.
+ However, when we make a copy of this function, the copied function type doesn't include the
+ external parameter name. So, when we call the copy, we use "data(1986)" instead of "data(for: 1986)."
+ */
 
 
+/*
+ The "sorted()" function gives us the ability to use our own custom sorting logic.
+ This custom sorting function needs to take two strings as input and return "true"
+ if the first string should come before the second in the sorted order, or "false"
+ if the first string should come after the second. If Lucas were in charge,
+ the function would be like this:
+ */
 
 let team = ["Andre", "Graci", "Lucas", "R2-D2", "C3PO"]
 let sortedNames = team.sorted()
 print(sortedNames)
 
 /*
+
+ If the first name is "Lucas," we return "true" to sort "name1" before "name2." Conversely, 
+ if "name2" is "Lucas," we return "false" to sort "name1" after "name2."
+ If neither name is "Lucas," we default to using the "<" operator for a standard
+ alphabetical sort.
+
+ In summary, you can pass a custom sorting function to the "sorted()" function, 
+ as long as that function a) takes two strings as input, and b) returns a Boolean.
+ "sorted()" can then use this function to determine the sorting order.
+ 
 func teamCaptain(name1: String, name2: String) -> Bool {
     if name1 == "Lucas" {
         return true
@@ -106,6 +128,21 @@ func teamCaptain(name1: String, name2: String) -> Bool {
     }
     return name1 < name2
 }
+ 
+ The beauty of closures is that we can seamlessly combine them with the requirements 
+ of functions like "sorted()." "sorted()" simply needs a function that can take two
+ strings and return a Boolean. It doesn't matter if that function is formally created
+ using "func" or provided on the spot using a closure.
+
+ So, instead of passing the "teamCaptainName()" function to "sorted()", 
+ we can use a closure. We open with a curly brace, define its parameters and return type,
+ add "in," and then write our standard function code inside it.
+
+ I understand this might initially feel challenging. It's not because you're not smart 
+ enough or not cut out for Swift programming; it's simply because closures can be
+ quite complex. Don't worry – we'll explore ways to make this concept more approachable!
+
+ Alright, let's write some new code that uses a closure to call "sorted()":
 */
 
 let teamCaptainName = team.sorted(by: {(name1: String, name2: String) -> Bool in
@@ -117,3 +154,22 @@ let teamCaptainName = team.sorted(by: {(name1: String, name2: String) -> Bool in
     return name1 < name2
 })
 print(teamCaptainName)
+
+/*
+ I understand that this might seem like a lot of new syntax to digest all at once, 
+ but I want to assure you that it will become easier to understand. In the very next chapter,
+ we'll explore techniques to make the code more concise and easier to follow.
+
+ But for now, let's break down what's happening in this code:
+
+ 1 - We're still using the "sorted()" function just like before.
+
+ 2 - Instead of passing in a regular function, we're passing a closure. Everything from the 
+ opening brace (after "by:") down to the closing brace on the last line belongs to this closure.
+
+ 3 - Inside the closure, we specify the two parameters that "sorted()" will provide us, 
+ which are both strings. We also declare that our closure will return a Boolean value.
+ Then, we mark the start of the closure's code by using the "in" keyword.
+
+ 4 - Everything else within the closure is just standard function code.
+ */

@@ -173,3 +173,139 @@ print(teamCaptainName)
 
  4 - Everything else within the closure is just standard function code.
  */
+
+/*
+ TRAILING CLLOSURES SYNTAX
+ 
+ As a reminder, the "sorted()" function can accept any kind of function for custom sorting, 
+ with one important rule: that function must take two items from the array (in this case,
+ two strings) and return a Boolean set to "true" if the first string should come before
+ the second.
+
+ To be crystal clear, this function must adhere to these rules. If it doesn't return 
+ anything or if it only accepts one string, Swift won't let us build our code.
+
+ Now, think about this: in the code we provided, the function we pass to "sorted()" 
+ must deal with two strings and return a Boolean. So, why do we need to specify the
+ types of our two parameters and the return type in our closure?
+
+ The answer is simple: we don't. There's no need to specify the parameter types because 
+ they must be strings, and we don't need to specify the return type because it must
+ be a Boolean.
+ */
+
+let TheBigBangTheoryNames = ["Sheldon", "Leonard", "Rajesh", "Howard", "Penny", "Amy", "Bernadette", "Stuart"]
+let sortedBigBang = TheBigBangTheoryNames.sorted()
+print(sortedBigBang)
+
+//Swift allows special syntax called trailing closure syntax. It looks like this:
+let SheldonFirst = TheBigBangTheoryNames.sorted{name1, name2 in
+    if name1 == "Sheldon" {
+        return true
+    } else if name2 == "Sheldon" {
+        return false
+    }
+    return name1 < name2
+}
+
+let firstName = SheldonFirst
+print(firstName)
+
+/*
+ Instead of passing the closure as a parameter, we directly begin the closure itself. 
+ In doing so, we remove "(by:" from the beginning and the closing parenthesis at the end.
+ This structure helps keep things tidy and logical because if the parameter list and "in"
+ were outside, it would look even more confusing.
+
+ Now, there's one more way Swift simplifies closures: it can automatically give us parameter 
+ names using shorthand syntax. With this shorthand, we no longer need to write "name1"
+ and "name2"; instead, we rely on Swift's predefined values, "$0" for the first string
+ and "$1" for the second.
+
+ By using this syntax, our code becomes even more concise:
+ */
+
+let AmyFirst = TheBigBangTheoryNames.sorted{
+    if $0 == "Amy" {
+        return true
+    } else if $1 == "Amy" {
+        return false
+    }
+    return $0 < $1
+}
+
+let AmyNow = AmyFirst
+print(AmyNow)
+
+/*
+ When we're working with values that we use more than once, it makes sense.
+ However, if our "sorted()" call is simpler, such as when we only want to
+ perform a reverse sort, I would do this:
+ */
+
+let reversePeopleOrder = TheBigBangTheoryNames.sorted {
+    return $0 > $1
+}
+
+/*
+ The "in" keyword is crucial; it indicates the conclusion of the parameters and return type, 
+ leaving everything that follows as the body of the closure. There's a purpose behind this
+ structure, and you'll understand it shortly.
+
+ In the example below, I've reversed the sorting order from "<" to ">", and now that we've 
+ simplified the code to a single line, we can eliminate the "return" keyword,
+ making it incredibly concise:
+ */
+
+let reverseEverybody = TheBigBangTheoryNames.sorted{$0 > $1}
+let everyoneReversed = reverseEverybody
+print(everyoneReversed)
+
+/*
+ There aren't strict rules for when to use shorthand syntax and when not to, but as a guideline, 
+ I typically use shorthand syntax unless one of the following conditions is met:
+
+ 1 - The closure's code is lengthy.
+ 2 - We use "$0" and similar placeholders more than once each.
+ 3 - There are three or more parameters (e.g., "$2," "$3," and so on).
+ If you're still not convinced about the usefulness of closures, let's explore two more examples.
+
+ First, we have the "filter()" function, which allows us to apply some code to every item in an 
+ array and create a new array containing items for which the code returns "true." For instance,
+ we can find all team players whose names start with "S" like this:
+ */
+
+let onlyS = TheBigBangTheoryNames.filter{$0.hasPrefix("S")}
+print(onlyS)
+/*
+ This code will output ["Sheldon", "Stuart"] because those are the only two team members whose 
+ names start with "T."
+
+ Now, let's move on to the second example. The "map()" function allows us to modify each item 
+ in an array using our own custom code and returns a new array containing all the modified items:
+ */
+
+let UppercasedCharacters = TheBigBangTheoryNames.map{$0.uppercased()}
+print(UppercasedCharacters)
+
+/*
+ This code will print ["SHELDON", "LEONARD", "RAJESH", "HOWARD", "PENNY", "AMY", "BERNADETTE", "STUART"] 
+ because it has transformed each name into uppercase and generated a new array with the results.
+
+ Quick tip: When working with "map()", the type of data you return doesn't have to be the same as the 
+ type you started with. For instance, you could convert an array of integers into an array of strings.
+
+ As I mentioned earlier, you'll frequently use closures in SwiftUI:
+
+ 1 - When you create a list of data on the screen, SwiftUI will ask you to provide a function that takes 
+ one item from the list and converts it into something that can be displayed on the screen.
+
+ 2 - When you create a button, SwiftUI will request one function to execute when the button is pressed 
+ and another to generate the contents of the button, which could be an image, text, and more.
+
+ 3 - Even arranging pieces of text vertically is done using a closure.
+
+ You could certainly create separate functions every time SwiftUI requires these, but believe me, 
+ you won't. Closures make this kind of code feel entirely natural, and you'll be amazed at how SwiftUI
+ leverages them to create elegantly simple and clean code.
+ */

@@ -309,3 +309,8 @@ print(UppercasedCharacters)
  you won't. Closures make this kind of code feel entirely natural, and you'll be amazed at how SwiftUI
  leverages them to create elegantly simple and clean code.
  */
+
+
+/*
+ ACCEPTANCE FUNCTIONS AS PARAMETERS
+ */

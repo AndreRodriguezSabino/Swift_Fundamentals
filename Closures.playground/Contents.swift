@@ -314,3 +314,42 @@ print(UppercasedCharacters)
 /*
  ACCEPTANCE FUNCTIONS AS PARAMETERS
  */
+
+func makeArray(size: Int, using generartor: () -> Int) -> [Int]{
+    var number = [Int]()
+    
+    for _ in 1..<size {
+        let newNumber = generartor()
+        number.append(newNumber)
+    }
+    return number
+}
+
+let rolls = makeArray(size: 50) {
+    Int.random(in: 1...20)
+}
+print(rolls)
+
+func generateNumber() -> Int {
+    Int.random(in: 1...20)
+}
+
+let newRolls = makeArray(size: 50, using: generateNumber)
+print(newRolls)
+
+func doImportantWork(first: () -> Void, second: () -> Void, third: () -> Void) {
+    print("About to do the first work...")
+    first()
+    print("About to do the second work...")
+    second()
+    print("About to do the third work...")
+    third()
+}
+
+doImportantWork {
+    print("First work done.")
+} second: {
+    print("Second work done.")
+} third: {
+    print("Third work done.")
+}

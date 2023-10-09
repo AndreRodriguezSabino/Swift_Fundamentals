@@ -313,6 +313,13 @@ print(UppercasedCharacters)
 
 /*
  ACCEPTANCE FUNCTIONS AS PARAMETERS
+ 
+ There's one more aspect of closures I'd like to cover: how to write functions that can take other
+ functions as arguments. This skill is particularly valuable when working with closures due to trailing
+ closure syntax, but it's a useful ability to have in general.
+ 
+ Here's a function that creates an array of integers by repeatedly executing another function a specified
+ number of times:
  */
 
 func makeArray(size: Int, using generartor: () -> Int) -> [Int]{
@@ -324,19 +331,76 @@ func makeArray(size: Int, using generartor: () -> Int) -> [Int]{
     }
     return number
 }
+/*
+ Let's break down how this works:
 
+ 1 - We have a function named "makeArray()" that accepts two parameters: the first one specifies the number
+ of integers we want in the array, and the second parameter is a function. This function doesn't take
+ any parameters but will return an integer each time it's called. "makeArray()" itself returns an array
+ of integers.
+
+ 2 - Inside "makeArray()", we start by creating an empty array to hold our integers.
+
+ 3 - We then enter a loop that repeats as many times as specified.
+
+ 4 - In each iteration of the loop, we call the generator function that was passed as a parameter.
+ This function generates and returns a single integer, which we add to the "numbers" array.
+
+ 5 - Finally, once the loop has run its course, we return the filled-up array of integers.
+
+ In essence, the core of "makeArray()" is quite straightforward: it repeatedly calls a function 
+ to produce integers, collects those integers into an array, and ultimately returns that array.
+ 
+ I understand that this code might appear a bit complex with multiple sets of parentheses and 
+ return types. Let's break it down into a linear reading:
+
+ 1 - We're defining a new function.
+
+ 2 - This function is named "makeArray()".
+
+ 3 - It takes two parameters:
+
+ • The first parameter is an integer named "size."
+ • The second parameter is a function called "generator," which doesn't take any parameters but
+ returns an integer.
+ 
+ 4 - In the end, the entire "makeArray()" function returns an array of integers.
+ */
+
+/*As a result, we can create arrays of integers of any size by providing a function that specifies
+ how each number should be generated:
+ */
 let rolls = makeArray(size: 50) {
     Int.random(in: 1...20)
 }
 print(rolls)
 
+/*
+ And remember, you can achieve the same functionality using regular functions as well.
+ So, you could write code like this:
+ */
 func generateNumber() -> Int {
     Int.random(in: 1...20)
 }
 
 let newRolls = makeArray(size: 50, using: generateNumber)
 print(newRolls)
+/*
+ This code will invoke "generateNumber()" 50 times to populate the array.
 
+ As you learn Swift and SwiftUI, there will be only a few occasions when you'll need to understand 
+ how to accept functions as parameters. However, now you have a basic understanding of how it
+ functions and its significance.
+
+ Before we move on, there's one more thing to cover: you can make your function accept multiple 
+ function parameters if needed. In such cases, you can specify multiple trailing closures.
+ This syntax is quite common in SwiftUI, so it's essential to provide you with a glimpse of it here.
+ */
+
+/*
+ To illustrate this, here's a function that takes three function parameters, and each of these
+ functions doesn't take any parameters and doesn't return anything:
+ */
 func doImportantWork(first: () -> Void, second: () -> Void, third: () -> Void) {
     print("About to do the first work...")
     first()
@@ -346,6 +410,15 @@ func doImportantWork(first: () -> Void, second: () -> Void, third: () -> Void) {
     third()
 }
 
+/*
+ I've included additional "print()" statements to simulate specific tasks being performed between 
+ the calls to "first," "second," and "third."
+
+ When calling this function, the first trailing closure follows the same pattern as what we've 
+ used previously. However, the second and third closures are formatted slightly differently:
+ you close the brace from the previous closure, then specify the external parameter name followed
+ by a colon, and then open another brace for the next closure. Here's the code structure:
+ */
 doImportantWork {
     print("First work done.")
 } second: {
@@ -353,3 +426,9 @@ doImportantWork {
 } third: {
     print("Third work done.")
 }
+
+/*
+ Having three trailing closures is not as unusual as you might think. In SwiftUI, for instance,
+ creating a section of content requires three trailing closures: one for the content itself,
+ one for a header to be placed above it, and one for a footer to be placed below it.
+ */

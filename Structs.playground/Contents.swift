@@ -186,3 +186,21 @@ print(skywalker.holidaysAccrued)
  this variable, and it holds whatever value the user attempted to assign to the property.
  */
 
+
+struct Game {
+    var titles = [String]() {
+        willSet {
+            print("All Games title right now are: \(titles)")
+            print("This is now the new list of games: \(newValue)")
+        }
+        didSet {
+            print("The amount of Game title included are/is: \(titles.count).")
+            print("The amount of Games were \(oldValue) before new purcharse.")
+        }
+    }
+}
+
+var newGames = Game()
+newGames.titles.append("The Lengend of Zelda, Breath of the Wild")
+newGames.titles.append("God of War, Raganarok")
+newGames.titles.append("Resident Evil")

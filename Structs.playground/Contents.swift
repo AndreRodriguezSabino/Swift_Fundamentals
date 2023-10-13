@@ -129,3 +129,27 @@ print(lucas.holidaysRemaining)
 
 var arteaga = Employee.init(name: "Graciela Arteaga")
 arteaga.takeHolidays(days: 7)
+
+
+struct Staff {
+    let name: String
+    var holidaysAccrued = 14
+    var holidaysTaken = 0
+    
+    var holidaysRemaining: Int {
+        get {
+            holidaysAccrued - holidaysTaken
+        }
+        set {
+            holidaysAccrued = holidaysTaken + newValue
+        }
+    }
+}
+
+var skywalker = Staff.init(name: "Anakin Skywalker", holidaysAccrued: 14)
+skywalker.holidaysTaken += 4
+skywalker.holidaysRemaining = 5
+print(skywalker.holidaysAccrued)
+
+
+

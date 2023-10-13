@@ -130,14 +130,43 @@ print(lucas.holidaysRemaining)
 var arteaga = Employee.init(name: "Graciela Arteaga")
 arteaga.takeHolidays(days: 7)
 
+/*
+ -- How to compute property values dynamically --
+ 
+ Structs can include two types of properties: "stored properties" and "computed properties." 
+ A "stored property" is a variable or constant that stores specific data within an instance
+ of the struct. On the other hand, a "computed property" dynamically calculates its value each
+ time it's accessed. This means that computed properties combine the features of both stored
+ properties and functions: you access them like stored properties, but they function like functions.
 
+ To illustrate, consider our previous example of an "Employee" struct now as Staff, which could keep
+ track of the remaining vacation days for an employee.
+ */
 struct Staff {
     let name: String
     var holidaysAccrued = 14
     var holidaysTaken = 0
-    
+/*
+ The current implementation of the struct works for basic purposes. However, we are losing valuable 
+ information in the process. We assign an employee 14 days of vacation and subtract them as
+ days are taken, but this approach results in the loss of the original grant of days.
+ 
+ This concept is quite powerful: on the surface, it appears like we're reading a regular property, 
+ but in the background, Swift is executing code to calculate its value each time.
+
+ However, we can't write to it at this point because we haven't informed Swift how to handle that. 
+ To enable writing to such properties, we need to provide both a "getter" and a "setter" - these are
+ fancy names for the "code that reads" and the "code that writes," respectively.
+ */
     var holidaysRemaining: Int {
+        /*
+         In this scenario, the getter is straightforward because it involves our existing code.
+         However, the setter poses an interesting question. When you set the "holidaysRemaining"
+         for an employee, do you intend to increase or decrease their "holidaysAccrued" value,
+         or should "holidaysAccrued" remain unchanged while we adjust "holidaysTaken" instead?
+         */
         get {
+            //To address this, we can modify the struct to use a computed property, like this:
             holidaysAccrued - holidaysTaken
         }
         set {
@@ -151,5 +180,9 @@ skywalker.holidaysTaken += 4
 skywalker.holidaysRemaining = 5
 print(skywalker.holidaysAccrued)
 
-
+/*
+ Observe how "get" and "set" are markers for distinct pieces of code that execute when reading
+ or writing a value. What's particularly noteworthy is "newValue" – Swift automatically provides
+ this variable, and it holds whatever value the user attempted to assign to the property.
+ */
 

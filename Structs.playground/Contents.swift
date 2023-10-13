@@ -187,6 +187,26 @@ print(skywalker.holidaysAccrued)
  */
 
 
+/*
+ In Swift, we have the capability to implement property observers, which are unique blocks of code
+ that execute when properties undergo changes. There are two types of property observers: "didSet"
+ observers that run immediately after the property has changed, and "willSet" observers that run
+ just before the property is about to change.
+ 
+ The example below creates a Game struct, and modifies its values a few times.
+ 
+ With property observers, we can attach a "print()" call directly to a property using "didSet." 
+ This means that whenever the property changes, regardless of where or how it changes, our specified
+ code will always run. If you find it useful, Swift automatically provides the "oldValue" constant
+ inside "didSet," in case you need to implement custom functionality based on the previous value.
+
+ There's also a "willSet" variant that allows you to execute code before the property changes. 
+ It provides the new value that is about to be assigned, enabling you to take different actions
+ based on this anticipated change.
+
+ We can illustrate all these features in a single code sample, which will print messages as the 
+ values change, providing you with a visual representation of how the code flows when executed:
+ */
 struct Game {
     var titles = [String]() {
         willSet {
@@ -204,3 +224,14 @@ var newGames = Game()
 newGames.titles.append("The Lengend of Zelda, Breath of the Wild")
 newGames.titles.append("God of War, Raganarok")
 newGames.titles.append("Resident Evil")
+
+/*
+ Certainly, when you append an item to an array, both "willSet" and "didSet" observers are triggered, 
+ resulting in extensive output when the code runs.
+
+ In practical situations, "willSet" is employed less frequently than "didSet," but it's still beneficial
+ to recognize its presence. Irrespective of your selection, it's crucial to be mindful and prevent
+ overburdening property observers with excessive tasks. For instance, if a seemingly simple operation
+ like "newGames.title += 1" initiates resource-intensive processes, it can lead to recurrent problems
+ and performance issues.
+ */

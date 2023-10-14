@@ -235,3 +235,102 @@ newGames.titles.append("Resident Evil")
  like "newGames.title += 1" initiates resource-intensive processes, it can lead to recurrent problems
  and performance issues.
  */
+
+
+/*
+   -- Create Custom Initializers --
+ 
+ Initializers are special methods crafted to ready a new struct instance for use. As you've observed,
+ Swift automatically generates one for us, taking into account the properties we define within a struct.
+ However, you can also create your own custom initializers, provided you adhere to a fundamental principle:
+ by the time the initializer completes its execution, all properties within the struct must have a value assigned.
+ */
+
+
+//Let’s start by looking again at Swift’s default initializer for structs:
+struct randomPlayer {
+    let name: String
+    let number: Int
+}
+
+let playerOne = randomPlayer(name: "Lucas", number: 10)
+
+/*
+ That creates a new Player instance by providing values for its two properties. Swift calls this the memberwise 
+ initializer, which is a fancy way of saying an initializer that accepts each property in the order it was defined.
+
+ Like I said, this kind of code is possible because Swift silently generates an initializer accepting those two values, 
+ but we could write our own to do the same thing. The only catch here is that you must be careful to distinguish between
+ the names of parameters coming in and the names of properties being assigned.
+ */
+
+struct Player {
+    var name: String
+    var number: Int
+    
+    init(name: String) {
+        self.name = name
+        /*
+         Certainly, it's worth noting that our custom initializers are not obliged to function in the
+         same way as Swift's default memberwise initializer. For instance, we can specify that you must
+         supply a player name, while the shirt number is generated randomly:
+         */
+        number = Int.random(in: 1...99)
+    }
+}
+/*
+ This code functions similarly to our previous one, with the distinction that we now own the initializer, 
+ granting us the ability to include additional functionality if necessary.
+
+ Nonetheless, there are a couple of key observations I'd like you to make:
+
+ 1 - Unlike a regular function, you won't find the "func" keyword here. While the syntax resembles that of 
+ a function, Swift treats initializers differently.
+ 2 - Despite the fact that this creates a new Player instance, initializers never explicitly specify a return type. 
+ They always return the type of data to which they belong.
+ 3 - I've employed "self" to clearly convey our intent to assign parameters to properties. For instance, "self.name" 
+ signifies that we are assigning the "name" parameter to the "name" property. This distinction is crucial because
+ without "self," we would have "name = name," which would be unclear. It could be interpreted as either assigning
+ the property to the parameter, assigning the parameter to itself, or something entirely different. By using
+ "self.name," we make it explicit that we are referring to "the name property belonging to the current instance,"
+ eliminating any ambiguity.
+ */
+let player = Player(name: "Andre")
+print(player.number)
+
+
+struct newPlayer {
+    var name: String
+    var number = 0
+}
+    /*
+     Once you introduce a custom initializer for your struct, the default memberwise initializer disappears.
+     If you wish to retain it, you can do so by moving your custom initializer to an extension, as shown here:
+     */
+    extension newPlayer {
+        init() {
+            self.name = "Anonymous"
+            print("Generating an Anonymous Player...")
+        }
+}
+
+let myself = newPlayer(name: "Andre")
+let anonymous = newPlayer()
+print(myself)
+print(anonymous)
+
+/*
+ Always keep in mind the fundamental rule: all properties must have a value by the time the initializer completes. 
+ If we had neglected to provide a value for the "number" property inside the initializer, Swift would have refused
+ to compile our code.
+
+ It's crucial to note that while you can call other methods of your struct within your initializer, you cannot do 
+ so before assigning values to all your properties. Swift requires assurance of safety before proceeding with any
+ other operations.
+
+ You have the flexibility to include multiple initializers in your structs, along with the ability to utilize 
+ features like external parameter names and default values. However, once you introduce your custom initializers,
+ the automatically generated memberwise initializer in Swift becomes inaccessible, unless you take extra steps to
+ retain it. This isn't an accidental limitation; it signifies that, with a custom initializer, Swift assumes you
+ have a unique way of initializing your properties, making the default initializer no longer necessary.
+ */

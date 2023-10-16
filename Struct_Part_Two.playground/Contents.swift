@@ -18,9 +18,10 @@ struct bankAccount {
      observers, and similar components.
 
      To convey this, you just need to add a single word:
-     PRIVATE
+     • PRIVATE
+     • SET -> access granted only using methods.
      */
-    private var funds = 0
+    private(set) var funds = 0
     
     mutating func deposit(amount: Int) {
         funds += amount

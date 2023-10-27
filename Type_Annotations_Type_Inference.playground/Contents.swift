@@ -1,4 +1,4 @@
-import Cocoa
+import SwiftUI
 
 // TYPE ANNOTATION AND TYPE INFERENCE
 

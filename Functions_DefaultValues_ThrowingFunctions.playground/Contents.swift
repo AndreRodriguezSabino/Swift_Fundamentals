@@ -1,4 +1,4 @@
-import Cocoa
+import SwiftUI
 
 /*
  When we add parameters to functions, it's like giving the function special

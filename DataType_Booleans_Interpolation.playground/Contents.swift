@@ -1,4 +1,4 @@
-import SwiftUI
+import Cocoa
 
 /* BOOLEAN that came from George Boole, an English mathematician
  who spent time of his life researching and writting about logic.

@@ -1,4 +1,4 @@
-import SwiftUI
+import Cocoa
 
 /*
  In Swift programs very often make choices:

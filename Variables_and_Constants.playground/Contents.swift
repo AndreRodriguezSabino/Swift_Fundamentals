@@ -1,4 +1,4 @@
-import SwiftUI
+import Cocoa
 
 var greeting = "Hello, world!"
 /* VAR is a keyword for a variable creation.

@@ -1,4 +1,4 @@
-import SwiftUI
+import Cocoa
 
 /*
  When you've crafted a piece of code that you find particularly useful

@@ -80,3 +80,36 @@ newGame.score += 5
  structs. However, for now, the key takeaway is this: both structs and classes are indispensable,
  and you'll require both when working with SwiftUI.
  */
+
+/*
+ WHY DOES SWIFT HAVE BOTH CLASSES AND STRUCTS?
+ 
+ Classes and structs in Swift offer developers the capability to craft customized, intricate 
+ types comprising properties and methods. However, they distinguish themselves through five
+ significant differences:
+
+ • Classes do not automatically generate memberwise initializers.
+ 
+ • Inheritance is supported in classes, enabling one class to build upon another, inheriting 
+ its properties and methods.
+ 
+ • Copies of structs are always unique, whereas copies of classes refer to the same shared data.
+ 
+ • Classes have deinitializers, methods executed when an instance of the class is destroyed, which 
+ structs lack.
+ 
+ • Variable properties in constant classes can be altered, while in constant structs, modifying 
+ variable properties is prohibited.
+ 
+ The essence is that these differences exist and are crucial. Most Swift developers typically
+ opt for structs over classes when possible. Therefore, when selecting a class over a struct,
+ it's typically for the specific behavior outlined above.
+ 
+ WHY DON'T SWIFT CLASSES HAVE A MEMBERWISE INITIALIZER?
+ 
+ One of the valuable features of Swift's structs is the automatic creation of a synthesized memberwise initializer. This feature allows us to generate new instances of the struct by simply specifying its properties. However, this is not available for Swift's classes, which might be inconvenient. But why is this feature absent in classes?
+
+ The primary reason lies in the concept of inheritance within classes, which would complicate the functionality of memberwise initializers. Consider this scenario: if I developed a class that you inherited from and later appended some properties to my class, your code would break. All the areas where you relied on my memberwise initializer would suddenly cease to function.
+
+ Swift presents a straightforward solution: instead of automatically producing a memberwise initializer, authors of classes must manually create their initializers. This approach enables the addition of properties without impacting the class's initializer or other classes that inherit from it. Moreover, when modifications to the initializer are made, the author is fully conscious of the repercussions for any inheriting classes.
+ */

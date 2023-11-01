@@ -113,3 +113,78 @@ newGame.score += 5
 
  Swift presents a straightforward solution: instead of automatically producing a memberwise initializer, authors of classes must manually create their initializers. This approach enables the addition of properties without impacting the class's initializer or other classes that inherit from it. Moreover, when modifications to the initializer are made, the author is fully conscious of the repercussions for any inheriting classes.
  */
+
+/*
+ In Swift, the concept of inheritance enables us to create classes based on existing classes. When a class inherits from another (referred to as the "parent" or "super" class), the inheriting class (the "child" or "subclass") gains access to the properties and methods of the parent class. This access allows us to modify or extend the behavior of the new class by making small adjustments or additions.
+
+ To implement inheritance in Swift, specify the parent class after a colon following the name of the child class. This establishes the relationship between the classes. For instance, consider an example of an Employee class with a property and an initializer:
+ */
+
+class Employee {
+    let hour: Int
+    
+    init(hour: Int) {
+        self.hour = hour
+    }
+    /*
+     Since Developer inherits from Employee, we can directly call the printSummary() method on instances of Developer, like this:
+     */
+    func printSummary() {
+        print("I work \(hour) hours a day.")
+    }
+}
+
+//We could make two subclasses of Employee, each of which will gain the hours property and initializer:
+
+class Developer: Employee {
+    func work() {
+        print("I am writing code for \(hour) hours.")
+    }
+    /*
+     So, if we wanted developers to have a unique printSummary() method, we’d add this to the Developer class:
+     */
+    override func printSummary() {
+        print("I am a Swift developer and sometimes I spend \(hour) hours typing code.")
+        /*
+         Because Developer inherits from Employee, we can immediately start calling printSummary() on instances of Developer.
+         */
+    }
+}
+
+class Manager: Employee {
+    func work() {
+        print("I am going to meeting for \(hour) hours.")
+    }
+    
+}
+
+/*
+ See how the child classes can directly access the 'hours' property as if they've defined it themselves, without the need for redundant code.
+
+ Both classes inherit from the 'Employee' class and bring in their unique modifications. When we create instances of these classes and invoke the 'work()' method, the resulting behavior will differ between the two instances.
+ */
+
+let andre = Developer(hour: 8)
+let graci = Manager(hour: 9)
+let lucas = Employee(hour: 8)
+andre.work()
+andre.printSummary()
+/*
+ It becomes a bit more complex when you aim to modify an inherited method. Consider the scenario where we placed printSummary() within the Employee class, but perhaps one of the child classes requires slightly different functionality.
+
+ In Swift, a straightforward rule is enforced: if a child class intends to alter a method from its parent class, it must use the 'override' keyword in the child class's version of the method. This rule serves two purposes:
+
+ 1 - If you attempt to modify a method without employing 'override', Swift will prevent the code from building. This prevents accidental method overrides.
+ 2 - If you use 'override' but the method doesn’t actually override something from the parent class, Swift will reject the code build as it's likely a mistake.
+ */
+graci.work()
+lucas.printSummary()
+
+/*
+ In addition to sharing properties, methods can also be shared and accessed by the child classes. For instance, consider adding the following code to the Employee class.
+ 
+ In Swift, the handling of method overrides is intelligent. For instance, if your parent class includes a work() method without parameters, and the child class introduces a work() method that accepts a string to specify the work location, this situation doesn't demand the 'override' keyword because you're not directly replacing the parent method.
+
+ Helpful hint: If you are certain that your class shouldn't support inheritance, you can label it as 'final'. This signifies that while the class itself can inherit from other sources, it cannot be used as a parent class. No child class can utilize a 'final' class as its parent.
+ */
+

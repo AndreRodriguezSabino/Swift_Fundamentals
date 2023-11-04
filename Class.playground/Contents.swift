@@ -397,3 +397,75 @@ print(user2.username)
  
  Now, using copy() allows us to obtain an object with identical initial data, while any subsequent modifications won't affect the original instance.
  */
+
+/*
+ HOW TO CREATE DEINITIALIZER FOR A CLASS
+ 
+ In Swift, classes have the option to include a deinitializer, which functions as the opposite of an initializer. Instead of being called upon object 
+ creation, a deinitializer is invoked when the object is being destroyed.
+
+ There are a few specific considerations regarding deinitializers:
+
+ Deinitializers, like initializers, don't use "func" — they are a distinct type.
+ Deinitializers cannot take parameters or return any data, and therefore are not written with parentheses.
+ The deinitializer is automatically invoked when the final copy of a class instance is being destroyed. This might occur, for instance, when the instance 
+ was created within a finishing function.
+ Deinitializers are not directly called by the programmer; they are managed automatically by the system.
+
+ Structs do not have deinitializers because they can't be copied. The timing of when deinitializers are called depends on the concept of scope, which 
+ represents the context where information is available:
+
+ Variables created within a function are only accessible within that function.
+ Variables created within if conditions or loops are limited to those specific contexts.
+ Each of these examples, such as conditions, loops, and functions, create local scopes delineated by braces.
+
+ Exiting scope means the context in which a value was created is disappearing. For structs, this implies the data is being destroyed. For classes, 
+ when the final copy — the last constant or variable pointing at a class instance — is destroyed, the underlying data is also destroyed, and the
+ system reclaims the associated memory.
+
+ To illustrate, we could create a class featuring an initializer and deinitializer that prints a message upon creation and destruction:
+ */
+
+class Users {
+    var id: Int
+    
+    init(id: Int) {
+        self.id = id
+        print("User \(id): I am alive!")
+    }
+    deinit {
+        print("User \(id): I am dead!")
+    }
+}
+
+/*
+ Now, we can swiftly create and destroy instances using a loop. If we create a User instance inside the loop, it will be automatically destroyed
+ when the loop iteration concludes:
+ */
+
+for i in 1...3 {
+    let user = Users(id: i)
+    print("User \(user.id): I am in control!")
+}
+
+/*
+ When you run that code, you'll notice that it creates and completely destroys each user individually, with one being destroyed before another is 
+ even created.
+
+ It's important to remember that the deinitializer is only invoked when the last remaining reference to a class instance is eliminated. This could 
+ be a variable or constant that you've stored, or perhaps an instance was added to an array.
+
+ For instance, if we were appending our User instances as they were created, these instances would only be destroyed when the array is cleared:
+ */
+
+var users = [Users]()
+
+for i in 1...3 {
+    let user = Users(id: i)
+    print("User \(user.id): I'm in control!")
+    users.append(user)
+}
+
+print("Loop is finished!")
+users.removeAll()
+print("Array is clear!")

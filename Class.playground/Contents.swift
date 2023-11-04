@@ -136,7 +136,7 @@ class Employee {
 
 //We could make two subclasses of Employee, each of which will gain the hours property and initializer:
 
-class Developer: Employee {
+final class Developer: Employee {
     func work() {
         print("I am writing code for \(hour) hours.")
     }
@@ -188,3 +188,35 @@ lucas.printSummary()
  Helpful hint: If you are certain that your class shouldn't support inheritance, you can label it as 'final'. This signifies that while the class itself can inherit from other sources, it cannot be used as a parent class. No child class can utilize a 'final' class as its parent.
  */
 
+/*
+ When would you want to override a method?
+ 
+ In Swift, when a class inherits from a parent class, it gains the ability to override the methods and occasionally the properties of that parent class. This allows the child class to replace the implementation of the parent's method with its own.
+
+ This level of customization is incredibly valuable for developers. Imagine this: someone has crafted a fantastic class that you'd like to utilize, but it's not a perfect fit. Wouldn't it be convenient to override just a portion of its behavior rather than reworking the entire thing from scratch?
+
+ Absolutely! This is precisely where method overriding becomes essential: you retain all the desired behavior while tweaking one or two aspects within a custom subclass.
+
+ In UIKit, Apple's original iOS user interface framework, this approach was frequently employed. For instance, consider built-in apps like Settings and Messages, both displaying information in rows. Settings includes rows like General, Control Center, Display & Brightness, while Messages presents individual rows for different conversations. In UIKit, these are referred to as tables and share common behaviors, such as scrolling through rows, selecting them by tapping, displaying small gray arrows on the right side, and more.
+
+ These row lists are quite prevalent, so Apple offers existing code containing standard behaviors. However, certain aspects need adjustment, like the number of rows or their contents. Swift developers would create subclasses of Apple's table and override specific parts they wished to modify, thereby inheriting built-in functionality while gaining flexibility and control.
+
+ Swift requires the 'override' keyword before overriding functions, which is beneficial:
+
+ Using 'override' when it's unnecessary (if the parent class doesn’t declare the same method) triggers an error. This prevents typos, like mismatched parameter names or types, and ensures your override won’t fail if the parent class alters its method without corresponding changes in the child class.
+ Failure to use 'override' when necessary also generates an error, preventing accidental changes in behavior inherited from the parent class.
+ */
+
+/*
+ Which classes should be declared as final?
+ 
+ Final classes in programming cannot be inherited from, preventing users from adding new functionality or altering the existing functionality. This behavior isn't the default and requires explicit designation using the 'final' keyword.
+
+ Remember, when someone subclasses your class, they can override properties and methods, granting them significant control. If they dislike something you've implemented, they have the power to entirely replace it. They might continue using your original method along with their replacement, but they might not.
+
+ This can lead to issues: perhaps your class performs a crucial function that shouldn't be altered, or you have clients under a support contract and don't want them to disrupt how your code operates.
+
+ Apple's older code was predominantly written in Objective-C before Swift. Objective-C lacked robust support for final classes, so Apple often resorted to large warnings in their documentation. For instance, the AVPlayerViewController class, designed for playing movies, carries a prominent yellow warning stating that subclassing and overriding its methods aren't supported and may result in undefined behavior. Although the reasons may not always be clear, it's advised not to override these classes. Another example is the Timer class, which manages timed events like alarms, and it straightforwardly warns: "Do not subclass Timer."
+
+ Previously, in Swift, final classes were considered more performance-efficient due to providing additional information on code execution, enabling optimizations. However, this performance distinction is no longer true. Nevertheless, many developers still habitually declare classes as final to communicate the intent that subclassing isn’t encouraged unless explicitly allowed. This practice aids in conveying how the code is intended to be used.
+ */

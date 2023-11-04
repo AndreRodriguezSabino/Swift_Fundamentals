@@ -331,3 +331,69 @@ class Car: Vehicle {
 let teslaX = Car(isElectric: true, isConvertible: false)
 
 // Tip: When a subclass doesn't have any custom initializers of its own, it automatically inherits the initializers of its parent class.
+
+/*
+ In Swift, all instances of a class share the same data. This implies that any modifications made to one instance will directly affect 
+ all other instances. This behavior occurs because classes are reference types in Swift, signifying that all class instances refer back
+ to the same original data source.
+
+ To witness this behavior, consider this straightforward class:
+ */
+
+class User {
+    var username = "Anonymous"
+    
+    func copy() -> User {
+        let user = User()
+        user.username = username
+        return user
+    }
+}
+
+/*
+ This class contains only one property, but due to being stored within a class, it will be shared among all instances of the class.
+
+ Let's create an instance of this class:
+ */
+
+var user1 = User()
+//We could then take a copy of user1 and change the username value:
+
+var user2 = user1.copy()
+user2.username = "Andre"
+/*
+ I hope you can see the direction we're headed in! Having modified the username property of the copy, we can now print out the properties 
+ from each distinct copy:
+ */
+
+print(user1.username)
+print(user2.username)
+
+/*
+ ...and it will display “Andre” for both – despite modifying only one of the instances, the change is reflected in the other instance as well.
+
+ This might initially appear as a bug, but it's actually a deliberate feature—a crucial one at that—because it enables the sharing of common 
+ data across various components of our application. As you'll discover, SwiftUI heavily relies on classes for its data due to their easy data
+ sharing capabilities.
+
+ In contrast, structs don't share their data among copies. If we change the class User to struct User in our code, the outcome differs: it will 
+ first print “Anonymous” and then “Andre” because altering a copy doesn’t affect the original data.
+
+ To create a distinct copy of a class instance—a concept often referred to as a deep copy—you'll need to handle the creation of a new instance 
+ and ensure safe data transfer to replicate all the data.
+ */
+
+/*
+ 
+ class User {
+    var username = "Anonymous"
+ 
+    func copy() -> User {
+        let user = User()
+        user.username = username
+        return user
+    }
+ }
+ 
+ Now, using copy() allows us to obtain an object with identical initial data, while any subsequent modifications won't affect the original instance.
+ */

@@ -1,2 +1,3 @@
 <h1>Swift Fundamentals: Learning Repository</h1>
-<body><p>Welcome to the Swift Fundamentals repository! This collec9on of Swift code examples is created with the intention of fostering a community of learners and enthusiasts interested in mastering Swift programming skills. From the foundational elements to the more complex concepts, this repository is designed to cater to a wide spectrum of learning needs.</p></body>
+<body><p>Welcome to the Swift Fundamentals repository! 
+  This collection of Swift code examples is created with the intention of fostering a community of learners and enthusiasts interested in mastering Swift programming skills. From the foundational elements to the more complex concepts, this repository is designed to cater to a wide spectrum of learning needs.</p></body>

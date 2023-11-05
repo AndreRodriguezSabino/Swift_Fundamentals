@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1{
+            color: #F05137;
+        }
+        </style>
 </head>
  <div> 
-<h1 style="color:blue;">Swift Fundamental: Learning Repository</h1>
+<h1 style="#F05137;">Swift Fundamental: Learning Repository</h1>
     <body><p>Welcome to the Swift Fundamentals repository!<br>
   This collection of Swift code examples is created with the intention of fostering a community of learners and enthusiasts interested in mastering Swift programming skills. From the foundational elements to the more complex concepts, this repository is designed to cater to a wide spectrum of learning needs.</p></body><br>
   <h2>Introduction</h2>

@@ -16,7 +16,7 @@
 When contributing, ensure that the code you add aligns with our vision of providing examples that span the entire spectrum of Swift programming - from fundamental concepts to the more advanced and complex ones.</p></body><br>
   <h3>Structure</h3>
         <p>The repository is structured to encompass the full breadth of Swift programming concepts, categorised into sec9ons that gradually advance in complexity. The structure is as follows:</p>
-        <body>• Basic Elements: Fundamental code snippets covering variable declarations, data types, basic opera9ons, and control flow.
+        <body><p>• Basic Elements: Fundamental code snippets covering variable declarations, data types, basic operations, and control flow.
 • Intermediate Concepts: Examples exploring functions, collections, object- oriented programming principles, and more intricate control structures.
-• Advanced Techniques: Code illustrating advanced Swift functionalities, such as protocols, generics, error handling, and more complex algorithms.</body>
+• Advanced Techniques: Code illustrating advanced Swift functionalities, such as protocols, generics, error handling, and more complex algorithms.</p></body>
  </div>

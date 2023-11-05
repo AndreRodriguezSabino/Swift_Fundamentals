@@ -19,5 +19,7 @@ When contributing, ensure that the code you add aligns with our vision of provid
         <body><p>
             • Basic Elements: Fundamental code snippets covering variable declarations, data types, basic                    operations, and control flow.<br><br>
             • Intermediate Concepts: Examples exploring functions, collections, object- oriented programming                 principles, and more intricate control structures.<br><br>
-            • Advanced Techniques: Code illustrating advanced Swift functionalities, such as protocols,                      generics, error handling, and more complex algorithms.</p></body><br>
+            • Advanced Techniques: Code illustrating advanced Swift functionalities, such as protocols,                      generics, error handling, and more complex algorithms.<br><br>
+        The goal is to offer a smooth learning curve, allowing individuals to progress from one level to another, gaining a deeper understanding of Swift along the way.
+</p></body><br>
  </div>

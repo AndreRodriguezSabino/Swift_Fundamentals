@@ -26,5 +26,7 @@ When contributing, ensure that the code you add aligns with our vision of provid
      <p>Each section is organised into individual files, making it easy to locate and understand specific concepts. Comments are provided within the code to enhance comprehension.
 I encourage learners to explore the code examples, experiment with them, and use them as a reference while learning Swift.
 </p>
+     <h4>License</h4>
+     <p>This repository is open-source and available under the MIT License. You are welcome to use, modify, and distribute the code with minimal restrictions.</p>
  </body>
  </div>

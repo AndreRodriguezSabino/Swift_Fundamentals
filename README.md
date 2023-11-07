@@ -13,7 +13,7 @@
     <p>The primary goal of this repository is to offer a comprehensive resource for individuals at various stages of their Swift programming journey. The code examples included here are meticulously organised, starting from the basics and gradually progressing towards more intricate concepts. Whether you're an absolute beginner or someone looking to delve into complex Swift functionalities, this repository strives to be a valuable learning asset.</p><br>
   <h3>Contributing</h3>
     <p>Contributions and enhancements to this repository are highly encouraged! If you wish to contribute additional examples, improve existing ones, or suggest modifications, please feel free to fork this repository and submit a pull request. Your contributions can significantly enrich the learning experience for others in the community.
-When contributing, ensure that the code you add aligns with our vision of providing examples that span the entire spectrum of Swift programming - from fundamental concepts to the more advanced and complex ones.</p><br>
+When contributing, ensure that the code you add aligns with my vision of providing examples that span the entire spectrum of Swift programming - from fundamental concepts to the more advanced and complex ones.</p><br>
   <h3>Structure</h3>
         <p>The repository is structured to encompass the full breadth of Swift programming concepts, categorised into sections that gradually advance in complexity. The structure is as follows:</p>
         <p>
@@ -27,6 +27,6 @@ When contributing, ensure that the code you add aligns with our vision of provid
 I encourage learners to explore the code examples, experiment with them, and use them as a reference while learning Swift.
 </p>
      <h4>License</h4>
-     <p>This repository is open-source and available under the <a href=https://github.com/AndreRodriguezSabino/Swift_Fundamentals/blob/main/LICENSE target="_blank">MIT License</a>. You are welcome to use, modify, and distribute the code with minimal restrictions.</p>
+     <p>This repository is open-source and available under the <a href=https://github.com/AndreRodriguezSabino/Swift_Fundamentals/blob/main/LICENSE.md target="_blank">MIT License</a>. You are welcome to use, modify, and distribute the code with minimal restrictions.</p>
  </body>
  </div>

@@ -1,5 +1,9 @@
 import Cocoa
 
+/*
+ Version 1.0
+ */
+
 var greeting = "Hello, world!"
 /* VAR is a keyword for a variable creation.
  Variable is a kind of 'container' where you can store data

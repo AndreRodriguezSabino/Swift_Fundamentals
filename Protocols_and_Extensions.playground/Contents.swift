@@ -39,6 +39,14 @@ import Cocoa
  */
 
 protocol Vehicle {
+    /*
+     'var name' and 'var currentPassenger'
+     With those two extra requirements in place, Swift will warn us that both Car and Bicycle no longer conform to the
+     protocol because they are missing the properties. To fix that, we could add the properties to Car and Bicycle as you can see
+     from lines (75 and 76 for Car) and (138 and 139 for Bicycle):
+     */
+    var name: String { get }
+    var currentPassengers: Int { get set }
     func estimateTime(for distance: Int) -> Int
     func travel(distance: Int)
 }
@@ -64,6 +72,8 @@ protocol Vehicle {
  */
 
 struct Car: Vehicle {
+    let name = "Car"
+    var currentPassengers = 1
     func estimateTime(for distance: Int) -> Int {
         distance / 50
     }
@@ -125,6 +135,8 @@ commute(distance: 100, using: car)
  */
 
 struct Bicycle: Vehicle {
+    let name = "Bicycle"
+    var currentPassengers = 1
     func estimateTime(for distance: Int) -> Int {
         distance / 10
     }
@@ -135,3 +147,73 @@ struct Bicycle: Vehicle {
 
 let bike = Bicycle()
 commute(distance: 50, using: bike)
+
+/*
+ Now, we introduce a second struct that also adheres to the Vehicle protocol. This is where the potency of protocols 
+ becomes evident: we can now supply either a Car or a Bicycle to the commute() function. The internal logic of the
+ function can be as complex as needed, and when it invokes estimateTime() or travel(), Swift will automatically select
+ the appropriate method—when a car is passed in, it will declare "I'm driving," but with a bike, it will announce
+ "I'm cycling."
+
+ Protocols enable us to articulate the type of functionality we want to interact with, rather than specifying exact types. 
+ Instead of mandating "this parameter must be a car," we can express "this parameter can be anything at all, as long as it
+ can estimate travel time and move to a new location."
+
+ In addition to methods, protocols also allow us to define properties that must be present in conforming types. To achieve 
+ this, we use var, followed by the property name, and indicate whether it should be readable and/or writable.
+
+ For instance, we could specify that all types conforming to Vehicle must declare the number of seats they have and the 
+ current count of passengers, like this:
+ 
+ protocol Vehicles {
+     var name: String { get }
+     var currentPassengers: Int { get set }
+     func estimateTime(for distance: Int) -> Int
+     func travel(distance: Int)
+ }
+
+ These additions introduce two properties:
+
+ 1 - A string property named name, which must be readable. This could be a constant or a computed property with a getter.
+ 
+ 2 - An integer property named currentPassengers, which must be read-write. This could be a variable or a computed property 
+ with both a getter and a setter.
+ 
+ Type annotations are necessary for both properties since we cannot provide default values in a protocol, similar to how 
+ protocols cannot supply implementations for methods.
+ */
+
+/*
+ Once again, you have the flexibility to substitute those properties with computed properties as long as you adhere to the 
+ guidelines—using { get set } would disallow conforming to the protocol with a constant property.
+
+ Our protocol now mandates the implementation of two methods and two properties. This ensures that all conforming types must 
+ incorporate these four elements for our code to function correctly. Consequently, Swift can confidently assert the presence
+ of this functionality, allowing us to write code that depends on it.
+
+ For instance, we could craft a method that takes an array of vehicles and utilizes it to compute estimates across a variety of 
+ options:
+ */
+
+func getTravelEstimates(using vehicles: [Vehicle], distance: Int) {
+    for vehicle in vehicles {
+        let estimate = vehicle.estimateTime(for: distance)
+        print("\(vehicle.name): \(estimate) hours to travel \(distance)km")
+    }
+}
+
+/*
+ I trust this illustrates the genuine potency of protocols. We accept an entire array of the Vehicle protocol, enabling us to
+ pass in a Car, a Bicycle, or any other struct that conforms to Vehicle. Swift ensures seamless compatibility, making it work
+ effortlessly:
+ */
+
+getTravelEstimates(using: [car, bike], distance: 150)
+
+/*
+ In addition to receiving protocols as parameters, you can also return protocols from a function if necessary.
+
+ Quick tip: You have the flexibility to conform to as many protocols as necessary. Simply list them one by one, separated by commas.
+ If you find yourself needing to subclass something and conform to a protocol simultaneously, it's best practice to mention the parent
+ class name first, followed by the listed protocols.
+ */

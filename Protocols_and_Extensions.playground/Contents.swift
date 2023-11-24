@@ -249,6 +249,20 @@ var quote = "               Let's start a new phrase in this paragrapher    "
  and make it more concise:
  */
 extension String {
+    /*
+     Extensions also enable the addition of properties to types, but with a rule: these must only be computed properties, not stored ones.
+     The rationale is that adding new stored properties would impact the actual size of data types. For instance, if we appended several
+     stored properties to an integer, every integer everywhere would need more memory space, causing various issues.
+
+     Fortunately, we can still achieve a great deal using computed properties. As an example, a property I find handy to add to strings
+     is called lines, which segments the string into an array of individual lines. This leverages another string method called
+     components(separatedBy:), breaking the string into a string array by splitting it at a specified boundary. In this instance,
+     we'd set the boundary to be new lines, and this is how we'd integrate it into our string extension (also see line 344):
+     */
+    var lines: [String] {
+        self.components(separatedBy: .newlines)
+    }
+
     func trimmed() -> String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -273,3 +287,110 @@ extension String {
  */
 let trimmed = quote.trimmed()
 print(trimmed)
+
+/*
+ Way simpler!
+
+ This has indeed spared us some keystrokes, but is it significantly superior to a standard function?
+
+ In reality, we could have crafted a function like this:
+ */
+func trim(_ string: String) -> String {
+    string.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+//Then used it like this:
+let trimmed2 = trim(quote)
+
+/*
+ That's less code compared to using an extension, both in creating the function and utilizing it. This type of 
+ function is known as a global function because it's accessible throughout our entire project.
+
+ However, extensions offer several advantages over global functions, such as:
+
+ 1 - Convenient Discovery: When you type quote. in Xcode, it displays a list of methods associated with the string, 
+ including those added through extensions. This makes it easy to locate our additional functionality.
+ 
+ 2 - Organizational Clarity: Writing global functions can make your code appear messy; they are challenging to organize
+ and keep track of. On the flip side, extensions are naturally grouped by the data type they extend.
+ 
+ 3 - Access to Internal Data: Extensions, being a seamless part of the original type, enjoy full access to the type's
+ internal data. This means they can utilize properties and methods marked with private access control, for instance.
+ 
+ 4 - In-Place Modification: Extensions make it more straightforward to modify values directly, altering a value in place
+ rather than generating a new one.
+ 
+ To illustrate, earlier, we created a trimmed() method in the extension that produces a new string with removed whitespace 
+ and newlines. If we wanted to alter the string directly, we could include this in the extension:
+ 
+ mutating func trim() {
+     self = self.trimmed()
+ }
+ 
+ Because the quote string was created as a variable, we can trim it in place like this:
+ 
+ quote.trim()
+ */
+
+/*
+ Notice the slight change in method naming: when we return a new value, we use trimmed(), but when modifying the string directly, 
+ it's trim(). This isn't accidental; it aligns with Swift's design guidelines. If you're returning a new value instead of altering
+ it in place, you should employ word endings like "ed" or "ing," such as reversed().
+
+ Pro tip: Earlier, I introduced you to the sorted() method on arrays. Now armed with this rule, you should recognize that for a 
+ variable array, you can use sort() to sort the array in place rather than creating a new copy.
+ */
+
+//With that in place we can now read the lines property of any string, like so:
+
+let text = """
+Now, we are going to start a new line
+text to explaing some functionalities
+on how to use LINES method in
+our code adding it in an Array.
+"""
+print(text.lines.count)
+print(text.lines)
+
+/*
+ Whether they're simple one-liners or intricate functionalities, extensions consistently pursue the same objective: to simplify
+ your code writing process, enhance readability, and facilitate long-term maintenance.
+ */
+
+/*
+ Before we wrap up, I'd like to share a highly valuable trick when dealing with extensions. Earlier, you observed how Swift automatically
+ creates a memberwise initializer for structs, like this:
+ */
+
+struct Book {
+    let title: String
+    let numberOfPages: Int
+    let readingHours: Int
+}
+
+extension Book {
+    init(title: String, pageCount: Int) {
+        self.title = title
+        self.numberOfPages = pageCount
+        self.readingHours = pageCount / 50
+    }
+}
+
+let aH = Book(title: "Atomic Habits", numberOfPages: 320, readingHours: 6)
+
+/*
+ I also pointed out that crafting your own initializer results in Swift no longer automatically generating the memberwise one for us. 
+ This is intentional, as a custom initializer signifies our intention to assign data using specific custom logic.
+ 
+ If Swift were to maintain the memberwise initializer in this scenario, it would bypass our logic for calculating the approximate reading time.
+
+ However, there are instances where you want both – the ability to utilize a custom initializer while retaining Swift's automatic memberwise 
+ initializer. It's crucial to understand what Swift does in this scenario: if we implement a custom initializer within our struct, Swift deactivates
+ the automatic memberwise initializer.
+
+ Here's a little insight that might foreshadow what's next: if we implement a custom initializer within an extension, Swift won't disable the automatic 
+ memberwise initializer. This makes sense when you consider it: if adding a new initializer in an extension also turned off the default initializer,
+ a small modification from us could potentially disrupt various other Swift code.
+
+ Therefore, if we wish our Book struct to have both the default memberwise initializer and our custom one, we'd place the custom initializer in an extension.
+ */

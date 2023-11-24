@@ -217,3 +217,59 @@ getTravelEstimates(using: [car, bike], distance: 150)
  If you find yourself needing to subclass something and conform to a protocol simultaneously, it's best practice to mention the parent
  class name first, followed by the listed protocols.
  */
+
+/*
+ EXTENSION
+ 
+ In the realm of programming, extensions empower us to enhance the capabilities of any data type, whether it's one we crafted ourselves 
+ or one created by others – even if it's a type from Apple's library.
+
+ Let's delve into a practical example by exploring a method applicable to strings known as trimmingCharacters(in:). This method excels 
+ at purging specific types of characters from the beginning or end of a string. It can handle various character types, such as
+ alphanumeric letters, decimal digits, and, more frequently, whitespace and new lines.
+
+ Whitespace encompasses characters like the space and tab characters, along with their assorted variations. New lines refer to line 
+ breaks in text, and despite their seemingly straightforward nature, the reality is that there's no universal method for creating them.
+ Therefore, when we invoke the trim operation for new lines, it automatically takes care of all the diverse variants for us.
+
+ Consider this string as an illustration, where whitespace exists on both ends:
+ */
+var quote = "               Let's start a new phrase in this paragrapher    "
+/*
+ If we wanted to trim the whitespace and newlines on either side, we could do so like this:
+ let trimmed = quote.trimmingCharacters(in: .whitespacesAndNewlines)
+ */
+//print(trimmed)
+
+/*
+ The value .whitespacesAndNewlines is part of Apple's Foundation API, and interestingly, so is the trimmingCharacters(in:) method. 
+ As I mentioned way back at the start of this course, Foundation is loaded with handy code!
+
+ However, repeatedly calling trimmingCharacters(in:) can be a bit verbose. So, let's craft an extension to streamline the process 
+ and make it more concise:
+ */
+extension String {
+    func trimmed() -> String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+/*
+ Let's break down the process step by step:
+
+ 1 - We kick off with the extension keyword, signaling to Swift that we're extending the functionality of an existing type.
+ 
+ 2 - The type we're targeting is specified next – in this case, we're enhancing the capabilities of the String type.
+ 
+ 3 - Following that, we open a pair of curly braces, and all the code within these braces will be appended to strings.
+ 
+ 4 - We introduce a fresh method named trimmed(), designed to yield a new string as its output.
+ 
+ 5 - Inside this method, we make use of the familiar trimmingCharacters(in:) method, passing along its result.
+ 
+ 6 - It's worth noting the use of self here – it automatically points to the current string. This works seamlessly because
+ we're currently within a string extension.
+ 
+ 7 - Now, whenever we desire to eliminate whitespace and newlines, we can effortlessly employ the following syntax:
+ */
+let trimmed = quote.trimmed()
+print(trimmed)

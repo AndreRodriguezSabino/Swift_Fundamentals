@@ -394,3 +394,25 @@ let aH = Book(title: "Atomic Habits", numberOfPages: 320, readingHours: 6)
 
  Therefore, if we wish our Book struct to have both the default memberwise initializer and our custom one, we'd place the custom initializer in an extension.
  */
+
+/*
+ WHEN SHOULD YOU USE EXTENSIONS IN SWIFT?
+ 
+ Extensions provide us with the capability to enhance classes, structs, and more. This is particularly handy for modifying types we don't own – types 
+ that were authored by Apple or someone else. When we add methods through extensions, they blend seamlessly with the original type's methods. However,
+ there's a distinction for properties: extensions can only introduce computed properties and not new stored properties.
+
+ Beyond modifying external types, extensions are valuable for organizing our own code. While there are various approaches, let's focus on two: conformance 
+ grouping and purpose grouping.
+
+ Conformance grouping involves adding protocol conformance to a type through an extension and placing all required methods inside that extension. 
+ This simplifies the understanding of how much code a developer needs to keep in mind while reading an extension. For instance, if the current extension
+ adds support for Printable, developers won't encounter printing methods mixed in with methods from unrelated protocols.
+
+ On the flip side, purpose grouping entails creating extensions to perform specific tasks, making it more convenient to manage large types. For example, 
+ you might have an extension dedicated to handling the loading and saving of a particular type.
+
+ It's important to note that some developers realize they have a sizable class and attempt to make it more manageable by breaking it into extensions. 
+ To clarify, the type remains the same size as before; it's just neatly segmented. While this may enhance understanding, it doesn't actually reduce the
+ size of the class.
+ */

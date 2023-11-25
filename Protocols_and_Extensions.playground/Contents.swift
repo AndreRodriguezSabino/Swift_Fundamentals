@@ -416,3 +416,106 @@ let aH = Book(title: "Atomic Habits", numberOfPages: 320, readingHours: 6)
  To clarify, the type remains the same size as before; it's just neatly segmented. While this may enhance understanding, it doesn't actually reduce the
  size of the class.
  */
+
+/*
+ USING PROTOCOL EXTENSION
+ 
+ Protocols allow us to set up agreements that other types must follow, and extensions enable us to enhance the capabilities of existing types. But have 
+ you ever wondered what would occur if we could extend protocols themselves?
+
+ No need to wonder any longer, as Swift supports precisely this through something appropriately named "protocol extensions." With protocol extensions, 
+ we can extend an entire protocol to provide method implementations. This implies that any types conforming to that protocol automatically gain access
+ to those methods.
+
+ Let's delve into a simple example. It's quite common to write a condition to check if an array contains any values, like this:
+ */
+
+let videoGames = ["Xbox series X", "Playstation 5", "PC gamer"]
+
+if videoGames .isEmpty == false {
+    print("There ar: \(videoGames.count) video games.")
+}
+
+/*
+ I’m not really a big fan of either of those approaches, because they just don’t read naturally to me “if not some array is empty”?
+
+ We can fix this with a really simple extension for Array, like this:
+
+ extension Array {
+     var isNotEmpty: Bool {
+         isEmpty == false
+     }
+ }
+ 
+ Tip: Xcode’s playgrounds run their code from top to bottom, so make sure you put that extension before where it’s used.
+
+ Now we can write code that I think is easier to understand:
+
+ if videoGames.isNotEmpty {
+     print("Video Game count: \(videoGames.count)")
+ }
+ 
+ But we can improve upon this. You see, we just introduced isNotEmpty for arrays. However, what about sets and dictionaries? Sure, we could repeat 
+ ourselves and duplicate the code by creating separate extensions for sets and dictionaries. But there's a more efficient solution: Array, Set, and
+ Dictionary all adhere to a built-in protocol called Collection. This protocol provides them with useful functionalities like contains(), sorted(),
+ reversed(), and more.
+
+ This is significant because Collection is also the protocol that mandates the existence of the isEmpty property. So, if we create an extension on 
+ Collection, we can still access isEmpty because it's a required part of the protocol. Consequently, we can modify our code from using Array to using
+ Collection to achieve the following:
+ */
+
+extension Collection {
+    var isNotEmpty: Bool {
+        isEmpty == false
+    }
+}
+
+/*
+ With just that one-word modification, we can now utilize isNotEmpty not only on arrays but also on sets, dictionaries, and any other types that 
+ conform to the Collection protocol. Believe it or not, this small extension is present in thousands of Swift projects because many developers
+ find it enhances code readability.
+
+ More significantly, by extending the protocol, we're introducing functionality that would otherwise have to be implemented individually within 
+ each struct. This is a powerful approach, leading to a technique Apple refers to as protocol-oriented programming. In this approach, we can outline
+ some mandatory methods in a protocol and then include default implementations of those methods within a protocol extension. All conforming types
+ can then leverage these default implementations or provide their own as needed.
+
+ For instance, consider if we had a protocol like this one:
+ */
+
+protocol somebody {
+    var name: String { get }
+    func greeting()
+}
+
+/*
+ This implies that every type conforming to the protocol must include a greeting() method. However, we can also include a default implementation 
+ of that method in an extension, like this:
+ */
+
+extension somebody {
+    func greeting() {
+        print("Hello, I am \(name).")
+    }
+}
+
+/*
+ And now, types that conform to the protocol can include their own greeting() method if they wish, but it's not mandatory. They can always depend 
+ on the one already provided inside our protocol extension.
+
+ For instance, we could create an employee without implementing the greeting() method:
+ */
+
+struct newPerson: somebody {
+    let name: String
+}
+
+//But because it conforms to soembody, we could use the default implementation we provided in our extension:
+
+let myself = newPerson(name: "Andre Rodriguez")
+myself.greeting()
+/*
+ Swift makes extensive use of protocol extensions, but honestly, you don't need an in-depth understanding of them right now. You can create fantastic 
+ apps without ever delving deeply into protocol extensions. At this stage, it's sufficient to know that they exist!
+ */

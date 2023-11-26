@@ -180,6 +180,10 @@ printSquare(for: nil)
  
  Swift offers a third method for unwrapping optionals – and it's quite handy. It's known as the nil coalescing operator, 
  and it allows us to unwrap an optional while supplying a default value if the optional happens to be empty.
+ 
+ Nil coalescing allows us to try unwrapping an optional while offering a default value if the optional contains nil. In Swift,
+ this is extremely useful because although optionals are a valuable feature, it's generally preferable to have a non-optional –
+ an actual string rather than a "might be a string, might be nil." Nil coalescing provides an excellent means to achieve this.
 
  Let's take a step back:
  */

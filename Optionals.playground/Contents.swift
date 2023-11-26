@@ -174,3 +174,78 @@ printSquare(for: nil)
  Tip: You can use guard with any condition, even those that don't involve unwrapping optionals. For instance, you could 
  use guard someArray.isEmpty else { return }.
  */
+
+/*
+ NIL COALESCING
+ 
+ Swift offers a third method for unwrapping optionals – and it's quite handy. It's known as the nil coalescing operator, 
+ and it allows us to unwrap an optional while supplying a default value if the optional happens to be empty.
+
+ Let's take a step back:
+ */
+
+let captains = [
+    "Enterprise": "Picard",
+    "Voyager": "Janeway",
+    "Defiant": "Sisko"
+]
+
+let new = captains["Serenity"]
+
+/*
+ That attempts to read a key that doesn't exist in our captains dictionary, resulting in new being an optional string 
+ set to nil.
+
+ Using the nil coalescing operator, denoted by ??, we can assign a default value to any optional, like this:
+ */
+let newShip = captains["Serenity"] ?? "N/A"
+
+/*
+ That code fetches the value from the captains dictionary and tries to unwrap it. If the optional holds a value, it will 
+ be extracted and stored in new; otherwise, "N/A" will be used as a fallback.
+
+ This implies that regardless of whether the optional contains a value or is nil, the ultimate outcome is that new will 
+ be an actual string, not an optional one. It could be the string retrieved from the captains value, or it might be "N/A".
+
+ Now, I understand your thought process: why not just specify a default value when retrieving from the dictionary? 
+ If that's what you're thinking, you're absolutely correct:
+ 
+ let new = captains["Serenity", default: "N/A"]
+ 
+ That achieves precisely the same outcome, which might make it appear that the nil coalescing operator is redundant. 
+ However, the power of the nil coalescing operator extends beyond dictionaries; it can be applied to any optionals.
+
+ As an illustration, consider the randomElement() method on arrays, which yields a random item from the array. However, 
+ it returns an optional since the array could be empty. Therefore, we can leverage the nil coalescing operator to supply
+ a default:
+ */
+
+let tvShows = ["Archer", "Babylon 5", "Ted Lasso"]
+let favorite = tvShows.randomElement() ?? "None"
+
+
+ //Alternatively, suppose you have a struct with an optional property, and you wish to offer a reasonable default when it's absent:
+ 
+struct Book {
+    let title: String
+    let author: String?
+}
+
+let book = Book(title: "Beowulf", author: nil)
+let author = book.author ?? "Anonymous"
+print(author)
+
+/*
+ It's also handy when creating an integer from a string, where you receive an optional Int? because the conversion might have failed – 
+ for instance, you might have provided an invalid integer like "Hello." In such cases, we can employ nil coalescing to offer a default
+ value, as demonstrated below:
+ */
+
+let input = ""
+let numbers = Int(input) ?? 0
+print(numbers)
+
+/*
+ As evident from the examples, the nil coalescing operator proves beneficial whenever you're dealing with an optional and want to 
+ utilize the contained value or supply a default if it's absent.
+ */

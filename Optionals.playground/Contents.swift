@@ -125,3 +125,52 @@ if let number = number {
  So, inside the body of the condition, we possess an unwrapped value to manipulate – a genuine Int rather than an 
  optional Int?. However, outside the condition, we still have the optional.
  */
+
+/*
+ GUARD - unwrapping optional
+ 
+ You've already witnessed how Swift utilizes if let to unwrap optionals, and it's the most frequent method for dealing 
+ with optionals. However, there's a second approach that accomplishes nearly the same thing, and it's nearly as common:
+ guard let.
+
+ The syntax for guard let looks like this:
+ */
+
+func printSquare(for number: Int?) {
+    guard let number = number else {
+        print("Missing Input!")
+        return
+    }
+    print("\(number) X \(number) is \(number * number)")
+}
+printSquare(for: nil)
+
+/*
+ Similar to if let, guard let assesses whether there's a value within an optional. If a value exists, it extracts the 
+ value and assigns it to a constant of our selection.
+
+ However, the method employed by guard let flips the process around. So, if let executes the code within its braces if 
+ the optional contains a value, while guard let runs the code within its braces if the optional doesn't contain a value.
+ This explains the use of else in the code: "check that we can unwrap the optional, but if we can't, then..."
+ 
+ I understand it might seem like a minor distinction, but it carries significant implications. Guard provides a mechanism 
+ to verify whether our program state aligns with our expectations, and if it doesn't, to exit – for instance, to exit from
+ the current function.
+
+ This is often referred to as an "early return": we inspect the validity of all the function's inputs right at the beginning 
+ of the function, and if any are invalid, we run some code and exit immediately. If all our checks pass, the function can
+ proceed as intended.
+
+ guard is specifically designed for this programming style and, in fact, does two things to assist:
+
+ 1 - If you use guard to validate a function's inputs, Swift will always require you to use return if the check fails.
+ 
+ 2 - If the check passes and the optional being unwrapped contains a value, you can use that value after the guard code
+ concludes.
+ 
+ In summary, employ if let when you want to unwrap optionals to process them in some way, and turn to guard let to make 
+ sure optionals contain something and exit otherwise.
+
+ Tip: You can use guard with any condition, even those that don't involve unwrapping optionals. For instance, you could 
+ use guard someArray.isEmpty else { return }.
+ */

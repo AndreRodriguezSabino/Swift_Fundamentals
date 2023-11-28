@@ -294,3 +294,59 @@ print(authors)
  Admittedly, delving so deeply into optionals is not a common occurrence, but I hope you can appreciate the remarkably concise 
  syntax!
  */
+
+/*
+ How to handle function failure with optionals
+ 
+ When we invoke a function that might throw errors, we typically use try and handle errors as needed. Alternatively, if we are 
+ certain that the function won't fail, we use try!, acknowledging that if our assumption is incorrect, our code will crash.
+ (Note: Exercise caution and use try! sparingly.)
+
+ However, there's another approach: if our primary concern is whether the function succeeded or failed, we can employ an optional 
+ try to have the function return an optional value. If the function executes without throwing errors, the optional will contain
+ the return value. On the other hand, if any error is thrown, the function will return nil. While this means we won't precisely
+ know the specific error thrown, it often suffices to ascertain whether the function worked or not.
+
+ Here's how it's implemented:
+ */
+enum UserError: Error {
+    case badID, networkFailed
+}
+
+func getUser(id: Int) throws -> String {
+    throw UserError.networkFailed
+}
+
+if let user = try? getUser(id: 23) {
+    print("User: \(user)")
+}
+
+/*
+ The getUser() function is designed to always throw a networkFailed error, which suits our testing purposes. However, in this 
+ scenario, we aren't concerned about the specific error thrown; our primary interest lies in determining whether the call
+ yielded a user or not.
+
+ Enter try?: it transforms getUser() into a function that returns an optional string. This optional string will be nil if any 
+ errors occur. If your focus is on precisely identifying the error, this approach may not be suitable. Nevertheless, in many
+ cases, the exact nature of the error is not critical.
+
+ If you wish, you can pair try? with nil coalescing. This implies, "attempt to retrieve the return value from this function, 
+ but if it fails, use this default value instead."
+
+ However, exercise caution: ensure you include parentheses before nil coalescing so that Swift interprets your intention correctly. 
+ For instance, you would express it like this:
+ */
+
+let user = (try? getUser(id: 23)) ?? "Anonymous"
+print(user)
+
+/*
+ You'll frequently encounter try? in three key scenarios:
+
+ 1 - Teamed up with guard let to exit the current function if the try? call results in nil.
+ 
+ 2 - Paired with nil coalescing to try an operation and supply a default value in case of failure.
+ 
+ 3 - When invoking any throwing function without a return value, especially when you genuinely aren't concerned about whether it 
+ succeeded or not. This might be the case when you're writing to a log file or sending analytics to a server, for instance.
+ */
